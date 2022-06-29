@@ -1,0 +1,3 @@
+name = "discord-test"
+main = "src/main.ts"
+node_compat = true
