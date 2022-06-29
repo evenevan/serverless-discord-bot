@@ -1,0 +1,1 @@
+export const root = 'https://discord.com/api/v10/';

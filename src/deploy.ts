@@ -1,9 +1,13 @@
 import 'dotenv/config';
-import * as commands from './commands';
+import { commands } from './commands/map';
 
 (async () => {
     const token = process.env.DISCORD_TOKEN;
     const applicationId = process.env.DISCORD_APPLICATION_ID;
+
+    const structures = Object.values(commands).map((Command) => new Command().structure);
+
+    console.log(JSON.stringify(structures, undefined, 2));
 
     const response = await fetch(
         `https://discord.com/api/v10/applications/${applicationId}/commands`, {
@@ -12,7 +16,7 @@ import * as commands from './commands';
                 Authorization: `Bot ${token}`,
             },
             method: 'PUT',
-            body: JSON.stringify(Object.values(commands)),
+            body: JSON.stringify(structures),
         },
     );
 
