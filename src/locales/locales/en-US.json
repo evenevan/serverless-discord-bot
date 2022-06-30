@@ -1,14 +1,14 @@
 {
     "commandsInviteReply": {
-        "message": "[Invite this Bot]($1 \"Invite by Clicking Here\")"
+        "message": "[Invite this bot by clicking here!]($1 \"Click Here\")"
     },
-    "commandsPingFollowUp": {
-        "message": "Pong! $1ms"
+    "commandsPingReply": {
+        "message": "Pong! $1ms."
+    },
+    "commandsTestSend": {
+        "message": "@everyone"
     },
     "commandsTestReply": {
-        "message": "hi"
-    },
-    "commandsTestFollowUp": {
         "message": "hi"
     }
 }

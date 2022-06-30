@@ -23,14 +23,17 @@ export class TestCommand implements Command {
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {
         const { i18n } = interaction;
 
-        const message = await new Request().request(`${root}/channels/${interaction}/messages`, {
+        const message = await new Request().request(`${root}/channels/${interaction.channel_id}/messages`, {
             method: 'POST',
             headers: {
                 Authorization: `Bot ${env.DISCORD_TOKEN}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                content: i18n.getMessage('commandsTestReply'),
+                allowed_mentions: {
+                    parse: [],
+                },
+                content: i18n.getMessage('commandsTestSend'),
             }),
         });
 
@@ -39,7 +42,10 @@ export class TestCommand implements Command {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: i18n.getMessage('commandsTestFollowUp'),
+                allowed_mentions: {
+                    parse: [],
+                },
+                content: i18n.getMessage('commandsTestReply'),
                 flags: MessageFlags.Ephemeral,
             },
         });
