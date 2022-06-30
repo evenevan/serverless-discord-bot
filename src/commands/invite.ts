@@ -24,9 +24,6 @@ export class InviteCommand implements Command {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                allowed_mentions: {
-                    parse: [],
-                },
                 content: i18n.getMessage(
                     'commandsInviteReply', [
                         `https://discord.com/api/oauth2/authorize?client_id=${env.DISCORD_APPLICATION_ID}&permissions=2048&scope=applications.commands%20bot`,

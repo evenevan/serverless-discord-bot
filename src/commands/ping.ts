@@ -27,9 +27,6 @@ export class PingCommand implements Command {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                allowed_mentions: {
-                    parse: [],
-                },
                 content: i18n.getMessage(
                     'commandsPingReply', [
                         endTime - startTime,

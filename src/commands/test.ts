@@ -42,9 +42,6 @@ export class TestCommand implements Command {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                allowed_mentions: {
-                    parse: [],
-                },
                 content: i18n.getMessage('commandsTestReply'),
                 flags: MessageFlags.Ephemeral,
             },

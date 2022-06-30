@@ -1,6 +1,15 @@
+import { APIInteractionResponse } from 'discord-api-types/v10';
 import { locales } from '../locales/locales';
 
 export const defaultLocale: keyof typeof locales = 'en-US';
+
+export const defaultResponse: Partial<APIInteractionResponse> = {
+    data: {
+        allowed_mentions: {
+            parse: [],
+        },
+    },
+};
 
 export const restRequestTimeout: number = 5000;
 
