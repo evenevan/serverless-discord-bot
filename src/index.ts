@@ -50,7 +50,7 @@ export default {
 
         console.warn('Method used is not POST.');
 
-        return new Response('', { status: 400 });
+        return new Response(null, { status: 400 });
     },
 };
 
