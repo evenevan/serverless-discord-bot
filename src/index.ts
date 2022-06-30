@@ -15,6 +15,8 @@ export default {
             const isValidRequest = await verifyKey(request, env);
 
             if (!isValidRequest) {
+                console.warn('Bad request signature');
+
                 return new Response('Bad request signature.', { status: 401 });
             }
 
@@ -45,6 +47,8 @@ export default {
 
             return new CommandHandler().handle(interaction, env);
         }
+
+        console.warn('Method used is not POST.');
 
         return new Response('', { status: 400 });
     },

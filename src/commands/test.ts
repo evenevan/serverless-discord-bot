@@ -23,7 +23,7 @@ export class TestCommand implements Command {
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {
         const { i18n } = interaction;
 
-        const message = await new Request().request(`${root}/channels/621774933252374592/messages`, {
+        const message = await new Request().request(`${root}/channels/${interaction}/messages`, {
             method: 'POST',
             headers: {
                 Authorization: `Bot ${env.DISCORD_TOKEN}`,
