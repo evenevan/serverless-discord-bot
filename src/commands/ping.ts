@@ -3,19 +3,18 @@ import {
     APIChatInputApplicationCommandInteraction,
     InteractionResponseType,
     MessageFlags,
-    RESTPostAPIApplicationCommandsJSONBody,
 } from 'discord-api-types/v10';
-import { Command } from '../@types/Command';
 import { APIResponse } from '../structures/APIResponse';
+import { Command } from '../structures/Command';
 
-export class PingCommand implements Command {
-    public readonly structure: RESTPostAPIApplicationCommandsJSONBody;
-
+export class PingCommand extends Command {
     public constructor() {
-        this.structure = {
-            name: 'ping',
-            description: 'Pong!',
-        };
+        super({
+            structure: {
+                name: 'ping',
+                description: 'Pong!',
+            },
+        });
     }
 
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction) {

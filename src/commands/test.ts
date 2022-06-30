@@ -2,22 +2,22 @@ import {
     APIChatInputApplicationCommandInteraction,
     InteractionResponseType,
     MessageFlags,
-    RESTPostAPIApplicationCommandsJSONBody,
 } from 'discord-api-types/v10';
-import { Command } from '../@types/Command';
 import { ENV } from '../@types/ENV';
 import { APIResponse } from '../structures/APIResponse';
+import { Command } from '../structures/Command';
 import { Request } from '../structures/Request';
 import { root } from '../utility/Constants';
 
-export class TestCommand implements Command {
-    public readonly structure: RESTPostAPIApplicationCommandsJSONBody;
-
+export class TestCommand extends Command {
     public constructor() {
-        this.structure = {
-            name: 'test',
-            description: 'TESTING',
-        };
+        super({
+            structure: {
+                name: 'test',
+                description: 'TESTING',
+            },
+            guildIDs: ['621774933252374588'],
+        });
     }
 
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {

@@ -1,6 +1,6 @@
-import { Command } from '../@types/Command';
 import { InviteCommand } from './invite';
 import { PingCommand } from './ping';
+import { Command } from '../structures/Command';
 import { TestCommand } from './test';
 
 export const commands = {

@@ -2,20 +2,19 @@ import {
     APIChatInputApplicationCommandInteraction,
     InteractionResponseType,
     MessageFlags,
-    RESTPostAPIApplicationCommandsJSONBody,
 } from 'discord-api-types/v10';
-import { Command } from '../@types/Command';
 import { ENV } from '../@types/ENV';
 import { APIResponse } from '../structures/APIResponse';
+import { Command } from '../structures/Command';
 
-export class InviteCommand implements Command {
-    public readonly structure: RESTPostAPIApplicationCommandsJSONBody;
-
+export class InviteCommand extends Command {
     public constructor() {
-        this.structure = {
-            name: 'invite',
-            description: 'Get an invite link to add the bot to your server',
-        };
+        super({
+            structure: {
+                name: 'invite',
+                description: 'Get an invite link to add the bot to your server',
+            },
+        });
     }
 
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {

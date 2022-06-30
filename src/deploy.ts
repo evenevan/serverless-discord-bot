@@ -1,32 +1,83 @@
 import 'dotenv/config';
+import {
+    InteractionType,
+    RESTPostAPIApplicationCommandsJSONBody,
+} from 'discord-api-types/v10';
 import { commands } from './commands';
+import { i18n } from './locales/i18n';
 
 (async () => {
     const token = process.env.DISCORD_TOKEN;
     const applicationId = process.env.DISCORD_APPLICATION_ID;
 
-    const structures = Object.values(commands).map((Command) => new Command().structure);
+    const commandInstances = Object.values(commands).map((Command) => new Command());
 
-    console.log(JSON.stringify(structures, undefined, 2));
+    const globalCommands = commandInstances.filter(
+        (command) => typeof command.guildIDs === 'undefined',
+    ).map((command) => command.structure);
 
-    const response = await fetch(
+    const guildCommands = commandInstances.filter(
+        (command) => Number(command.guildIDs?.length) > 0,
+    );
+
+    const guildCommandsMap = { } as {
+        [key: string]: RESTPostAPIApplicationCommandsJSONBody[] | undefined
+    };
+
+    guildCommands.forEach((guildCommand) => {
+        guildCommand.guildIDs?.forEach((guildID) => {
+            guildCommandsMap[guildID] ??= [];
+
+            guildCommandsMap[guildID]?.push(guildCommand.structure);
+        });
+    });
+
+    await Promise.all(
+        Object.entries(guildCommandsMap).map(async ([guildID, guildGuildCommands]) => {
+            const guildResponse = await fetch(
+                `https://discord.com/api/v10/applications/${applicationId}/guilds/${guildID}/commands`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bot ${token}`,
+                    },
+                    method: 'PUT',
+                    body: JSON.stringify(guildGuildCommands),
+                },
+            );
+
+            if (guildResponse.ok) {
+                console.log(`Registered guild commands for ${guildID}`);
+            } else {
+                console.error(`Error registering global commands for ${guildID}`);
+                const text = await guildResponse.text();
+                console.error(text);
+            }
+        }),
+    );
+
+    const globalResponse = await fetch(
         `https://discord.com/api/v10/applications/${applicationId}/commands`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bot ${token}`,
             },
             method: 'PUT',
-            body: JSON.stringify(structures),
+            body: JSON.stringify(globalCommands),
         },
     );
 
-    if (response.ok) {
-        console.log('Registered all commands');
+    if (globalResponse.ok) {
+        console.log('Registered global commands');
     } else {
-        console.error('Error registering commands');
-        const text = await response.text();
+        console.error('Error registering global commands');
+        const text = await globalResponse.text();
         console.error(text);
     }
-
-    return response;
 })();
+
+declare module 'discord-api-types/v10' {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    interface APIBaseInteraction<Type extends InteractionType, Data> {
+        i18n: i18n;
+    }
+}
