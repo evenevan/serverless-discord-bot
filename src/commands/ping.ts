@@ -21,6 +21,8 @@ export class PingCommand implements Command {
     }
 
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {
+        const { i18n } = interaction;
+
         await new Request().request(`${root}interactions/${interaction.id}/${interaction.token}/callback`, {
             method: 'POST',
             headers: {
@@ -43,7 +45,11 @@ export class PingCommand implements Command {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                content: `Pong! ${endTime - startTime}ms`,
+                content: i18n.getMessage(
+                    'commandsPingFollowUp', [
+                        endTime - startTime,
+                    ],
+                ),
             }),
         });
     }

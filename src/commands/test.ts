@@ -21,6 +21,8 @@ export class TestCommand implements Command {
     }
 
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {
+        const { i18n } = interaction;
+
         const message = await new Request().request(`${root}/channels/621774933252374592/messages`, {
             method: 'POST',
             headers: {
@@ -28,7 +30,7 @@ export class TestCommand implements Command {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                content: 'hi',
+                content: i18n.getMessage('commandsTestReply'),
             }),
         });
 
@@ -37,7 +39,7 @@ export class TestCommand implements Command {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: 'hi',
+                content: i18n.getMessage('commandsTestFollowUp'),
                 flags: MessageFlags.Ephemeral,
             },
         });

@@ -5,6 +5,7 @@ import {
     InteractionType,
 } from 'discord-api-types/v10';
 import { ENV } from './@types/ENV';
+import { i18n } from './locales/i18n';
 import { CommandHandler } from './structures/CommandHandler';
 import { verifyKey } from './utility/verify';
 
@@ -34,9 +35,24 @@ export default {
                 );
             }
 
+            Object.defineProperty(
+                interaction,
+                'i18n',
+                {
+                    value: new i18n(interaction.locale),
+                },
+            );
+
             return new CommandHandler().handle(interaction, env);
         }
 
         return new Response('', { status: 400 });
     },
 };
+
+declare module 'discord-api-types/v10' {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    interface APIBaseInteraction<Type extends InteractionType, Data> {
+        i18n: i18n;
+    }
+}

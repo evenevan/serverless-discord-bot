@@ -1,0 +1,14 @@
+{
+    "commandsInviteReply": {
+        "message": "[Invite this Bot]($1 \"Invite by Clicking Here\")"
+    },
+    "commandsPingFollowUp": {
+        "message": "Pong! $1ms"
+    },
+    "commandsTestReply": {
+        "message": "hi"
+    },
+    "commandsTestFollowUp": {
+        "message": "hi"
+    }
+}
