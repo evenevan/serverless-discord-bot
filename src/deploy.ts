@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { commands } from './commands/map';
+import { commands } from './commands';
 
 (async () => {
     const token = process.env.DISCORD_TOKEN;

@@ -1,6 +1,6 @@
 name = "discord-test"
 compatibility_date = "2022-06-29"
-main = "src/main.ts"
+main = "src/index.ts"
 node_compat = true
 
 [vars]

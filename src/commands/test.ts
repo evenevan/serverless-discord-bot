@@ -7,22 +7,22 @@ import {
 import { Command } from '../@types/Command';
 import { ENV } from '../@types/ENV';
 import { APIResponse } from '../structures/APIResponse';
+import { Request } from '../structures/Request';
 import { root } from '../utility/Constants';
 
 export class TestCommand implements Command {
-    structure: RESTPostAPIApplicationCommandsJSONBody;
+    public readonly structure: RESTPostAPIApplicationCommandsJSONBody;
 
-    constructor() {
+    public constructor() {
         this.structure = {
             name: 'test',
             description: 'TESTING',
         };
     }
 
-    async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {
-        console.log(env.DISCORD_TOKEN);
-        const message = await fetch(`${root}/channels/621774933252374592/messages`, {
-            method: 'post',
+    public async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {
+        const message = await new Request().request(`${root}/channels/621774933252374592/messages`, {
+            method: 'POST',
             headers: {
                 Authorization: `Bot ${env.DISCORD_TOKEN}`,
                 'Content-Type': 'application/json',

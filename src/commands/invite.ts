@@ -9,16 +9,16 @@ import { ENV } from '../@types/ENV';
 import { APIResponse } from '../structures/APIResponse';
 
 export class InviteCommand implements Command {
-    structure: RESTPostAPIApplicationCommandsJSONBody;
+    public readonly structure: RESTPostAPIApplicationCommandsJSONBody;
 
-    constructor() {
+    public constructor() {
         this.structure = {
             name: 'invite',
             description: 'Get an invite link to add the bot to your server',
         };
     }
 
-    async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {
+    public async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
