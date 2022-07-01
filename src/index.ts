@@ -54,9 +54,3 @@ export default {
     },
 };
 
-declare module 'discord-api-types/v10' {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    interface APIBaseInteraction<Type extends InteractionType, Data> {
-        i18n: i18n;
-    }
-}

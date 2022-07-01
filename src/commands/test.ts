@@ -1,5 +1,6 @@
 import {
     APIChatInputApplicationCommandInteraction,
+    APIDMChannel,
     InteractionResponseType,
     MessageFlags,
 } from 'discord-api-types/v10';
@@ -23,7 +24,42 @@ export class TestCommand extends Command {
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {
         const { i18n } = interaction;
 
-        const message = await new Request().request(`${root}/channels/${interaction.channel_id}/messages`, {
+        const response = await new Request().request(`${root}/users/@me/channels`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bot ${env.DISCORD_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                recipient_id: (interaction.member?.user ?? interaction.user)!.id,
+            }),
+        });
+
+        const channel = await response.json() as APIDMChannel;
+
+        await new Request().request(`${root}/channels/${channel.id}/messages`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bot ${env.DISCORD_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                content: i18n.getMessage('commandsTestSend'),
+            }),
+        });
+
+        return new APIResponse({
+            type: InteractionResponseType.ChannelMessageWithSource,
+            data: {
+                content: i18n.getMessage('commandsTestReply'),
+                flags: MessageFlags.Ephemeral,
+            },
+        });
+    }
+}
+
+/**
+ * const message = await new Request().request(`${root}/channels/${interaction.channel_id}/messages`, {
             method: 'POST',
             headers: {
                 Authorization: `Bot ${env.DISCORD_TOKEN}`,
@@ -36,15 +72,4 @@ export class TestCommand extends Command {
                 content: i18n.getMessage('commandsTestSend'),
             }),
         });
-
-        console.log(JSON.stringify(await message.json(), undefined, 2));
-
-        return new APIResponse({
-            type: InteractionResponseType.ChannelMessageWithSource,
-            data: {
-                content: i18n.getMessage('commandsTestReply'),
-                flags: MessageFlags.Ephemeral,
-            },
-        });
-    }
-}
+ */

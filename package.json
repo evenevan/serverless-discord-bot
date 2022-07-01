@@ -3,7 +3,7 @@
     "author": "Attituding <Attituding@outlook.com>",
     "main": "dist/index.js",
     "devDependencies": {
-        "@cloudflare/workers-types": "^3.13.0",
+        "@cloudflare/workers-types": "^3.14.0",
         "@types/node": "^18.0.0",
         "@typescript-eslint/eslint-plugin": "^5.30.0",
         "@typescript-eslint/parser": "^5.30.0",
@@ -18,7 +18,7 @@
     "dependencies": {
         "@sapphire/snowflake": "^3.2.2",
         "deepmerge-ts": "^4.2.1",
-        "discord-api-types": "^0.35.0",
+        "discord-api-types": "^0.36.0",
         "dotenv": "^16.0.1"
     },
     "scripts": {
