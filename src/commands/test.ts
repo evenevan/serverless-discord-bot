@@ -16,7 +16,7 @@ export class TestCommand extends Command {
                 name: 'test',
                 description: 'TESTING',
             },
-            guildIDs: ['621774933252374588'],
+            guildIDs: ['873000534955667496'],
         });
     }
 
