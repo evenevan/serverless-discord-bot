@@ -6,11 +6,11 @@ import {
 } from '../utility/Constants';
 
 export class Request {
-    restRequestTimeout: number;
+    public readonly restRequestTimeout: number;
 
-    retry: number;
+    public retry: number;
 
-    retryLimit: number;
+    public readonly retryLimit: number;
 
     constructor() {
         this.restRequestTimeout = restRequestTimeout;

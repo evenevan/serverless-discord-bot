@@ -4,9 +4,9 @@ import { defaultLocale } from '../utility/Constants';
 // Simple implementation of Chrome's/Firefox's i18n
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export class i18n {
-    readonly locale: typeof locales[keyof typeof locales];
+    public readonly locale: typeof locales[keyof typeof locales];
 
-    readonly localeName: string;
+    public readonly localeName: string;
 
     public constructor(locale?: string) {
         this.localeName = locale && locales[locale as keyof typeof locales]
