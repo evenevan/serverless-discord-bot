@@ -5,12 +5,17 @@ import {
 } from 'discord-api-types/v10';
 import { commands } from './commands';
 import { i18n } from './locales/i18n';
+import { ENV } from './@types/ENV';
 
 (async () => {
     const token = process.env.DISCORD_TOKEN;
     const applicationId = process.env.DISCORD_APPLICATION_ID;
 
-    const commandInstances = Object.values(commands).map((Command) => new Command());
+    const env = process.env as unknown as ENV;
+
+    const commandInstances = Object.values(commands).map(
+        (Command) => new Command(env),
+    );
 
     const globalCommands = commandInstances.filter(
         (command) => typeof command.guildIDs === 'undefined',

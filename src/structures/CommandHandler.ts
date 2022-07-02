@@ -12,17 +12,17 @@ export class CommandHandler {
     public async handle(interaction: APIApplicationCommandInteraction, env: ENV) {
         const Command = commands[
             interaction.data.name
-        ] as (new () => CommandType) | undefined;
+        ] as (new (env: ENV) => CommandType) | undefined;
 
         if (Command) {
-            const command = new Command();
+            const command = new Command(env);
 
             if (isChatInputApplicationCommandInteraction(interaction)) {
-                return command.chatInput!(interaction, env);
+                return command.chatInput!(interaction);
             }
 
             if (isContextMenuApplicationCommandInteraction(interaction)) {
-                return command.contextMenu!(interaction, env);
+                return command.contextMenu!(interaction);
             }
         }
 

@@ -8,8 +8,9 @@ import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
 
 export class InviteCommand extends Command {
-    public constructor() {
+    public constructor(env: ENV) {
         super({
+            env: env,
             structure: {
                 name: 'invite',
                 description: 'Get an invite link to add the bot to your server',
@@ -17,7 +18,7 @@ export class InviteCommand extends Command {
         });
     }
 
-    public async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {
+    public async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
         const { i18n } = interaction;
 
         return new APIResponse({
@@ -25,7 +26,7 @@ export class InviteCommand extends Command {
             data: {
                 content: i18n.getMessage(
                     'commandsInviteReply', [
-                        `https://discord.com/api/oauth2/authorize?client_id=${env.DISCORD_APPLICATION_ID}&permissions=2048&scope=applications.commands%20bot`,
+                        `https://discord.com/api/oauth2/authorize?client_id=${this.env.DISCORD_APPLICATION_ID}&permissions=2048&scope=applications.commands%20bot`,
                     ],
                 ),
                 flags: MessageFlags.Ephemeral,

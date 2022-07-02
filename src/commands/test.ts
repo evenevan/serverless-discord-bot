@@ -11,8 +11,9 @@ import { Request } from '../structures/Request';
 import { root } from '../utility/Constants';
 
 export class TestCommand extends Command {
-    public constructor() {
+    public constructor(env: ENV) {
         super({
+            env: env,
             structure: {
                 name: 'test',
                 description: 'TESTING',
@@ -21,13 +22,13 @@ export class TestCommand extends Command {
         });
     }
 
-    public async chatInput(interaction: APIChatInputApplicationCommandInteraction, env: ENV) {
+    public async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
         const { i18n } = interaction;
 
         const response = await new Request().request(`${root}/users/@me/channels`, {
             method: 'POST',
             headers: {
-                Authorization: `Bot ${env.DISCORD_TOKEN}`,
+                Authorization: `Bot ${this.env.DISCORD_TOKEN}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -40,7 +41,7 @@ export class TestCommand extends Command {
         await new Request().request(`${root}/channels/${channel.id}/messages`, {
             method: 'POST',
             headers: {
-                Authorization: `Bot ${env.DISCORD_TOKEN}`,
+                Authorization: `Bot ${this.env.DISCORD_TOKEN}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
