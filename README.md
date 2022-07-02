@@ -8,8 +8,8 @@ Average CPU Time (roughly):
 
 Features:
 - Basic i18n implementation
-- Chat input support
-- Context menu support
+- Chat input support (Slash commands)
+- Context menu support (Right click actions)
 - Easy deployment of commands
 - Minimal dependencies
 - Object-oriented design
@@ -20,6 +20,6 @@ Secrets: DISCORD_APPLICATION_ID, DISCORD_TOKEN, DISCORD_PUBLIC_KEY
 
 You need wrangler to use this bot. Install via "npm i wrangler -g"
 
-"npm run start" for local testing
+"npm run dev" for local testing (use ngrok or similar to route localhost)
 
-"npm run deploy" to deploy to Cloudflare
+"npm run publish" to deploy to Cloudflare Workers

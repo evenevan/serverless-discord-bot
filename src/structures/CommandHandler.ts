@@ -26,6 +26,11 @@ export class CommandHandler {
             }
         }
 
+        console.warn(
+            `${this.constructor.name}:`,
+            `Received command was not found in export: ${interaction.data.name}`,
+        );
+
         return new APIResponse(null, {
             status: 400,
         });

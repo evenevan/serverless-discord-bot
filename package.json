@@ -22,7 +22,8 @@
         "dotenv": "^16.0.1"
     },
     "scripts": {
-        "start": "wrangler dev",
-        "deploy": "wrangler publish"
+        "dev": "wrangler dev",
+        "publish": "wrangler publish",
+        "deploy": "npx ts-node src/deploy.ts"
     }
 }
