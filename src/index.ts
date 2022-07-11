@@ -15,7 +15,7 @@ export default {
             const isValidRequest = await verifyKey(request, env);
 
             if (!isValidRequest) {
-                console.warn('Bad request signature');
+                console.warn('Bad request signature.');
 
                 return new Response('Bad request signature.', { status: 401 });
             }
