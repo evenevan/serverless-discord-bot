@@ -7,7 +7,6 @@ import {
 import { type ENV } from '../@types/ENV';
 import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
-import { Request } from '../structures/Request';
 import { root } from '../utility/Constants';
 
 export class TestCommand extends Command {
@@ -26,7 +25,7 @@ export class TestCommand extends Command {
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
         const { i18n } = interaction;
 
-        const response = await new Request().request(`${root}/users/@me/channels`, {
+        const response = await fetch(`${root}/users/@me/channels`, {
             method: 'POST',
             headers: {
                 Authorization: `Bot ${this.env.DISCORD_TOKEN}`,
@@ -39,7 +38,7 @@ export class TestCommand extends Command {
 
         const channel = await response.json() as APIDMChannel;
 
-        await new Request().request(`${root}/channels/${channel.id}/messages`, {
+        await fetch(`${root}/channels/${channel.id}/messages`, {
             method: 'POST',
             headers: {
                 Authorization: `Bot ${this.env.DISCORD_TOKEN}`,

@@ -15,6 +15,8 @@ import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
 import { Precondition } from '../structures/Precondition';
 
+// variables reset after ~30 sec, meaning that cooldowns past 30 sec ae not possible
+
 const cooldown: Collection<string, RateLimitManager> = new Collection();
 
 export class CooldownPrecondition extends Precondition {
