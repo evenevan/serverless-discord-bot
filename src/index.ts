@@ -1,10 +1,10 @@
 import {
-    APIApplicationCommandInteraction,
+    type APIApplicationCommandInteraction,
     APIPingInteraction,
     InteractionResponseType,
     InteractionType,
 } from 'discord-api-types/v10';
-import { ENV } from './@types/ENV';
+import { type ENV } from './@types/ENV';
 import { i18n } from './locales/i18n';
 import { CommandHandler } from './structures/CommandHandler';
 import { verifyKey } from './utility/verify';

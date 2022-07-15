@@ -25,6 +25,7 @@
         "import/prefer-default-export": ["off"],
         "indent": "off",
         "linebreak-style": ["error", "windows"],
+        "max-len": ["off"],
         "new-cap": [
             "error", {
                 "newIsCapExceptions": ["i18n"]

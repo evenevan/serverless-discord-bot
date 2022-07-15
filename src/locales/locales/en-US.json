@@ -10,5 +10,11 @@
     },
     "commandsTestReply": {
         "message": "hi"
+    },
+    "preconditionsCooldownError": {
+        "message": "You are executing this command too fast! This command can be executed $1 time(s) in $2 seconds. Please wait $3 more seconds before using this command again."
+    },
+    "preconditionOwnerOnly": {
+        "message": "You must be an owner to execute ths command."
     }
 }

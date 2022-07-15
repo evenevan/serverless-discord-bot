@@ -2,11 +2,15 @@ import {
     isChatInputApplicationCommandInteraction,
     isContextMenuApplicationCommandInteraction,
 } from 'discord-api-types/utils/v10';
-import { APIApplicationCommandInteraction } from 'discord-api-types/v10';
-import { ENV } from '../@types/ENV';
+import { type APIApplicationCommandInteraction } from 'discord-api-types/v10';
+import { type ENV } from '../@types/ENV';
 import { APIResponse } from './APIResponse';
 import { commands } from '../commands';
-import { Command as CommandType } from './Command';
+import { type Command as CommandType } from './Command';
+import { preconditions } from '../preconditions';
+
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
 
 export class CommandHandler {
     public async handle(interaction: APIApplicationCommandInteraction, env: ENV) {
@@ -17,11 +21,31 @@ export class CommandHandler {
         if (Command) {
             const command = new Command(env);
 
+            const preconditons = command.preconditions.map(
+                (precondition) => new preconditions[precondition](env),
+            );
+
             if (isChatInputApplicationCommandInteraction(interaction)) {
+                for (const precondition of preconditons) {
+                    const value = await precondition.chatInput!(interaction, command);
+
+                    if (value instanceof APIResponse) {
+                        return value;
+                    }
+                }
+
                 return command.chatInput!(interaction);
             }
 
             if (isContextMenuApplicationCommandInteraction(interaction)) {
+                for (const precondition of preconditons) {
+                    const value = await precondition.contextMenu!(interaction, command);
+
+                    if (value instanceof APIResponse) {
+                        return value;
+                    }
+                }
+
                 return command.contextMenu!(interaction);
             }
         }

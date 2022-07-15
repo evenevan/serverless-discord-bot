@@ -1,10 +1,10 @@
 import { DiscordSnowflake } from '@sapphire/snowflake';
 import {
-    APIChatInputApplicationCommandInteraction,
+    type APIChatInputApplicationCommandInteraction,
     InteractionResponseType,
     MessageFlags,
 } from 'discord-api-types/v10';
-import { ENV } from '../@types/ENV';
+import { type ENV } from '../@types/ENV';
 import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
 
@@ -12,6 +12,7 @@ export class PingCommand extends Command {
     public constructor(env: ENV) {
         super({
             env: env,
+            preconditions: ['cooldown'],
             structure: {
                 name: 'ping',
                 description: 'Pong!',

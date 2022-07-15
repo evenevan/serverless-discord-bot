@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import {
     InteractionType,
-    RESTPostAPIApplicationCommandsJSONBody,
+    type RESTPostAPIApplicationCommandsJSONBody,
 } from 'discord-api-types/v10';
 import { commands } from './commands';
 import { i18n } from './locales/i18n';

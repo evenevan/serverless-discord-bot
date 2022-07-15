@@ -1,7 +1,7 @@
-import { ENV } from '../@types/ENV';
+import { type ENV } from '../@types/ENV';
 import { InviteCommand } from './invite';
 import { PingCommand } from './ping';
-import { Command } from '../structures/Command';
+import { type Command } from '../structures/Command';
 import { TestCommand } from './test';
 
 export const commands = {
@@ -9,5 +9,5 @@ export const commands = {
     test: TestCommand,
     ping: PingCommand,
 } as {
-    [key: string]: new (env: ENV) => Command
+    [key: string]: new (env: ENV) => Command,
 };

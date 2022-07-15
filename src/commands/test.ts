@@ -1,10 +1,10 @@
 import {
-    APIChatInputApplicationCommandInteraction,
-    APIDMChannel,
+    type APIChatInputApplicationCommandInteraction,
+    type APIDMChannel,
     InteractionResponseType,
     MessageFlags,
 } from 'discord-api-types/v10';
-import { ENV } from '../@types/ENV';
+import { type ENV } from '../@types/ENV';
 import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
 import { Request } from '../structures/Request';
@@ -14,10 +14,12 @@ export class TestCommand extends Command {
     public constructor(env: ENV) {
         super({
             env: env,
+            preconditions: ['cooldown', 'ownerOnly'],
             structure: {
                 name: 'test',
                 description: 'TESTING',
             },
+            cooldown: 10000,
         });
     }
 

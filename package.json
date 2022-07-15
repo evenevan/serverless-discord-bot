@@ -16,6 +16,8 @@
         "wrangler": "^2.0.15"
     },
     "dependencies": {
+        "@discordjs/collection": "^0.7.0",
+        "@sapphire/ratelimits": "^2.4.4",
         "@sapphire/snowflake": "^3.2.2",
         "deepmerge-ts": "^4.2.1",
         "discord-api-types": "^0.36.0",

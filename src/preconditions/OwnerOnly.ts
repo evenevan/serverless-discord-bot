@@ -2,33 +2,41 @@ import {
     type APIChatInputApplicationCommandInteraction,
     InteractionResponseType,
     MessageFlags,
+    type APIBaseInteraction,
+    InteractionType,
+    APIUser,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/ENV';
+import { ENV } from '../@types/ENV';
 import { APIResponse } from '../structures/APIResponse';
-import { Command } from '../structures/Command';
+import { Precondition } from '../structures/Precondition';
+import { owners } from '../utility/Constants';
 
-export class InviteCommand extends Command {
+export class OwnerOnlyPrecondition extends Precondition {
     public constructor(env: ENV) {
         super({
             env: env,
-            preconditions: ['cooldown'],
-            structure: {
-                name: 'invite',
-                description: 'Get an invite link to add the bot to your server',
-            },
+            name: 'ownerOnly',
         });
     }
 
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
+        const user = (interaction.member?.user ?? interaction.user) as APIUser;
+
+        if (owners.includes(user.id)) {
+            return undefined;
+        }
+
+        return this.error(interaction);
+    }
+
+    public async error(interaction: APIBaseInteraction<InteractionType, unknown>) {
         const { i18n } = interaction;
 
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
                 content: i18n.getMessage(
-                    'commandsInviteReply', [
-                        `https://discord.com/api/oauth2/authorize?client_id=${this.env.DISCORD_APPLICATION_ID}&permissions=2048&scope=applications.commands%20bot`,
-                    ],
+                    'preconditionOwnerOnly',
                 ),
                 flags: MessageFlags.Ephemeral,
             },
