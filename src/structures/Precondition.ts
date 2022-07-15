@@ -25,7 +25,7 @@ export abstract class Precondition {
         this.name = name;
     }
 
-    public chatInput?(interaction: APIChatInputApplicationCommandInteraction, command: Command): Promise<void | APIResponse>;
+    public chatInput?(command: Command, interaction: APIChatInputApplicationCommandInteraction): Promise<APIResponse | undefined>;
 
-    public contextMenu?(interaction: APIContextMenuInteraction, command: Command): Promise<void | APIResponse>;
+    public contextMenu?(command: Command, interaction: APIContextMenuInteraction): Promise<APIResponse | undefined>;
 }

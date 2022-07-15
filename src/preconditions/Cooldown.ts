@@ -1,5 +1,8 @@
 import Collection from '@discordjs/collection';
-import { RateLimit, RateLimitManager } from '@sapphire/ratelimits';
+import {
+    RateLimit,
+    RateLimitManager,
+} from '@sapphire/ratelimits';
 import {
     type APIChatInputApplicationCommandInteraction,
     InteractionResponseType,
@@ -22,7 +25,7 @@ export class CooldownPrecondition extends Precondition {
         });
     }
 
-    public async chatInput(interaction: APIChatInputApplicationCommandInteraction, command: Command) {
+    public async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
         const rateLimitManager = cooldown.ensure(
             command.structure.name,
             () => new RateLimitManager(command.cooldown, command.cooldownLimit),
@@ -33,6 +36,13 @@ export class CooldownPrecondition extends Precondition {
         );
 
         if (rateLimit.limited) {
+            console.warn(
+                `${this.constructor.name}:`,
+                'User failed cooldown precondition.',
+                `Command: ${command.structure.name}.`,
+                `User: ${interaction.member?.user.id ?? interaction.user?.id}.`,
+            );
+
             return this.error(command, rateLimit, interaction);
         }
 

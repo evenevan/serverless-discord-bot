@@ -27,7 +27,7 @@ export class CommandHandler {
 
             if (isChatInputApplicationCommandInteraction(interaction)) {
                 for (const precondition of preconditons) {
-                    const value = await precondition.chatInput!(interaction, command);
+                    const value = await precondition.chatInput!(command, interaction);
 
                     if (value instanceof APIResponse) {
                         return value;
@@ -39,7 +39,7 @@ export class CommandHandler {
 
             if (isContextMenuApplicationCommandInteraction(interaction)) {
                 for (const precondition of preconditons) {
-                    const value = await precondition.contextMenu!(interaction, command);
+                    const value = await precondition.contextMenu!(command, interaction);
 
                     if (value instanceof APIResponse) {
                         return value;
@@ -52,7 +52,8 @@ export class CommandHandler {
 
         console.warn(
             `${this.constructor.name}:`,
-            `Received command was not found in export: ${interaction.data.name}`,
+            'Received command was not found in export.',
+            `Command: ${interaction.data.name}.`,
         );
 
         return new APIResponse(null, {

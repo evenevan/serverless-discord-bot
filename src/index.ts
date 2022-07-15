@@ -17,7 +17,11 @@ export default {
             if (!isValidRequest) {
                 console.warn('Bad request signature.');
 
-                return new Response('Bad request signature.', { status: 401 });
+                return new Response(
+                    'Bad request signature.', {
+                        status: 401,
+                    },
+                );
             }
 
             const interaction = await request.json() as

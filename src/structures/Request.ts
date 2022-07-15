@@ -51,7 +51,8 @@ export class Request {
             ) {
                 console.warn(
                     `${this.constructor.name}:`,
-                    `Retrying due to a response between 500 and 600: ${response.status}.`,
+                    'Retrying due to a response between 500 and 600.',
+                    `Status: ${response.status}.`,
                 );
 
                 this.retry += 1;
