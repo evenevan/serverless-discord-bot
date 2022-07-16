@@ -23,3 +23,5 @@ You need wrangler to use this bot. Install via "npm i wrangler -g"
 "npm run dev" for local testing (use ngrok or similar to route localhost)
 
 "npm run publish" to deploy to Cloudflare Workers
+
+For a database, you could use something like postgrest to use postgreSQL over http.
