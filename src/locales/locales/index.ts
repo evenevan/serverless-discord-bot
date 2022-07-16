@@ -1,5 +1,5 @@
-import one from './en-US.json';
+import en_US from './en-US.json';
 
 export const locales = {
-    'en-US': one,
+    'en-US': en_US,
 };
