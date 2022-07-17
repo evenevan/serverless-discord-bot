@@ -9,5 +9,7 @@ export const commands = {
     test: TestCommand,
     ping: PingCommand,
 } as {
-    [key: string]: new (env: ENV) => Command,
+    [key: string]:
+    | (new (env: ENV) => Command)
+    | undefined,
 };

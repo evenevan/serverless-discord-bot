@@ -4,9 +4,6 @@ import { Precondition } from '../structures/Precondition';
 import { OwnerOnlyPrecondition } from './OwnerOnly';
 
 export const preconditions = {
-    cooldown: CooldownPrecondition,
-    ownerOnly: OwnerOnlyPrecondition,
-} as {
-    cooldown: new (env: ENV) => Precondition,
-    ownerOnly: new (env: ENV) => Precondition,
+    cooldown: CooldownPrecondition as new (env: ENV) => Precondition,
+    ownerOnly: OwnerOnlyPrecondition as new (env: ENV) => Precondition,
 };

@@ -13,7 +13,7 @@ export abstract class Precondition {
 
     public readonly name: string;
 
-    constructor({
+    public constructor({
         env,
         name,
     }: {

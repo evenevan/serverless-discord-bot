@@ -3,6 +3,8 @@ import {
     type APIDMChannel,
     InteractionResponseType,
     MessageFlags,
+    ComponentType,
+    ButtonStyle,
 } from 'discord-api-types/v10';
 import { type ENV } from '../@types/ENV';
 import { APIResponse } from '../structures/APIResponse';
@@ -54,6 +56,19 @@ export class TestCommand extends Command {
             data: {
                 content: i18n.getMessage('commandsTestReply'),
                 flags: MessageFlags.Ephemeral,
+                components: [
+                    {
+                        type: ComponentType.ActionRow,
+                        components: [
+                            {
+                                type: ComponentType.Button,
+                                label: 'Test',
+                                style: ButtonStyle.Primary,
+                                custom_id: 'test',
+                            },
+                        ],
+                    },
+                ],
             },
         });
     }

@@ -24,7 +24,7 @@ export abstract class Command {
 
     public readonly guildIDs?: string[];
 
-    constructor({
+    public constructor({
         env,
         preconditions,
         structure,

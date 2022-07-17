@@ -3,10 +3,13 @@ import {
     APIPingInteraction,
     InteractionResponseType,
     InteractionType,
+    APIInteraction,
+    APIMessageComponentInteraction,
 } from 'discord-api-types/v10';
 import { type ENV } from './@types/ENV';
 import { i18n } from './locales/i18n';
 import { CommandHandler } from './structures/CommandHandler';
+import { ComponentHandler } from './structures/ComponentHandler';
 import { verifyKey } from './utility/verify';
 
 export default {
@@ -25,7 +28,7 @@ export default {
             }
 
             const interaction = await request.json() as
-                | APIApplicationCommandInteraction
+                | APIInteraction
                 | APIPingInteraction;
 
             if (interaction.type === InteractionType.Ping) {
@@ -49,7 +52,19 @@ export default {
                 },
             );
 
-            return new CommandHandler().handle(interaction, env);
+            if (interaction.type === InteractionType.ApplicationCommand) {
+                return new CommandHandler().handle(
+                    interaction as APIApplicationCommandInteraction,
+                    env,
+                );
+            }
+
+            if (interaction.type === InteractionType.MessageComponent) {
+                return new ComponentHandler().handle(
+                    interaction as APIMessageComponentInteraction,
+                    env,
+                );
+            }
         }
 
         console.warn('Method used is not POST.');

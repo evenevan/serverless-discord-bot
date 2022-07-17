@@ -6,7 +6,6 @@ import { type APIApplicationCommandInteraction } from 'discord-api-types/v10';
 import { type ENV } from '../@types/ENV';
 import { APIResponse } from './APIResponse';
 import { commands } from '../commands';
-import { type Command as CommandType } from './Command';
 import { preconditions } from '../preconditions';
 
 /* eslint-disable no-restricted-syntax */
@@ -16,7 +15,7 @@ export class CommandHandler {
     public async handle(interaction: APIApplicationCommandInteraction, env: ENV) {
         const Command = commands[
             interaction.data.name
-        ] as (new (env: ENV) => CommandType) | undefined;
+        ];
 
         if (Command) {
             const command = new Command(env);
