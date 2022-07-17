@@ -21,7 +21,7 @@ export class TestModal extends Modal {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: i18n.getMessage('modalsTestReply'),
+                content: i18n.getMessage('modalsTestResponse'),
                 flags: MessageFlags.Ephemeral,
             },
         });

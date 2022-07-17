@@ -1,26 +1,26 @@
 {
-    "commandsInviteReply": {
+    "commandsInviteResponse": {
         "message": "[Invite this bot by clicking here!]($1 \"Click Here\")"
     },
-    "commandsPingReply": {
+    "commandsPingResponse": {
         "message": "Pong! $1ms."
     },
     "commandsTestSend": {
         "message": "@everyone"
     },
-    "commandsTestReply": {
+    "commandsTestResponse": {
         "message": "hi"
     },
     "componentsTestResponseTitle": {
         "message": "This is a Modal"
     },
-    "componentsTestResponseComponentZeroLabel": {
-        "message": "This is a Modal"
+    "componentsTestResponseComponentsZeroLabel": {
+        "message": "Random Text Here"
     },
-    "modalsTestReply": {
+    "modalsTestResponse": {
         "message": "Received modal interaction!"
     },
-    "preconditionsCooldownError": {
+    "preconditionsCooldown": {
         "message": "You are executing this command too fast! This command can be executed $1 time(s) per every $2 seconds. Please wait $3 more seconds before using this command again."
     },
     "preconditionOwnerOnly": {

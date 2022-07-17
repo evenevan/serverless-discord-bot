@@ -56,7 +56,7 @@ export class TestCommand extends Command {
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
                 content: i18n.getMessage(
-                    'commandsTestReply',
+                    'commandsTestResponse',
                 ),
                 flags: MessageFlags.Ephemeral,
                 components: [

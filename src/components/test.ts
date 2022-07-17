@@ -40,7 +40,7 @@ export class TestComponent extends Component<APIMessageComponentButtonInteractio
                                 } as CustomID),
                                 style: TextInputStyle.Short,
                                 label: i18n.getMessage(
-                                    'componentsTestResponseComponentZeroLabel',
+                                    'componentsTestResponseComponentsZeroLabel',
                                 ),
                             },
                         ],

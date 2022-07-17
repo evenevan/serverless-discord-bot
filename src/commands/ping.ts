@@ -30,7 +30,7 @@ export class PingCommand extends Command {
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
                 content: i18n.getMessage(
-                    'commandsPingReply', [
+                    'commandsPingResponse', [
                         endTime - startTime,
                     ],
                 ),

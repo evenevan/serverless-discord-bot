@@ -64,7 +64,7 @@ export class CooldownPrecondition extends Precondition {
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
                 content: i18n.getMessage(
-                    'preconditionsCooldownError',
+                    'preconditionsCooldown',
                     [
                         command.cooldownLimit,
                         command.cooldown / 1000,
