@@ -46,34 +46,34 @@ export default {
                 },
             );
 
-            if (interaction.type === InteractionType.ApplicationCommand) {
-                return new CommandHandler(env).handle(
-                    interaction as APIApplicationCommandInteraction,
-                );
-            }
-
-            if (interaction.type === InteractionType.MessageComponent) {
-                return new ComponentHandler(env).handle(
-                    interaction as APIMessageComponentInteraction,
-                );
-            }
-
-            if (interaction.type === InteractionType.ModalSubmit) {
-                console.log(interaction.data);
-
-                return new ModalHandler(env).handle(
-                    interaction as APIModalSubmitInteraction,
-                );
-            }
-
             console.warn(
-                'Unknown interaction type.',
+                'Received interaction.',
                 `Type: ${interaction.type}.`,
             );
 
-            return new Response(null, {
-                status: 400,
-            });
+            switch (interaction.type) {
+                case InteractionType.ApplicationCommand:
+                    return new CommandHandler(env).handle(
+                        interaction as APIApplicationCommandInteraction,
+                    );
+                case InteractionType.MessageComponent:
+                    return new ComponentHandler(env).handle(
+                        interaction as APIMessageComponentInteraction,
+                    );
+                case InteractionType.ModalSubmit:
+                    return new ModalHandler(env).handle(
+                        interaction as APIModalSubmitInteraction,
+                    );
+                default:
+                    console.warn(
+                        'Unknown interaction type.',
+                        `Type: ${interaction.type}.`,
+                    );
+
+                    return new Response(null, {
+                        status: 400,
+                    });
+            }
         }
 
         console.warn('Method used is not POST.');
