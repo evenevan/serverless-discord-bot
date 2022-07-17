@@ -1,5 +1,5 @@
 import { type APIMessageComponentInteraction } from 'discord-api-types/v10';
-import { type ENV } from '../@types/ENV';
+import { type ENV } from '../@types/env';
 import { type Component } from '../structures/Component';
 import { TestComponent } from './test';
 

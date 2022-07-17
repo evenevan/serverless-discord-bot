@@ -3,15 +3,15 @@ import {
     type APIContextMenuInteraction,
     type RESTPostAPIApplicationCommandsJSONBody,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/ENV';
+import { type ENV } from '../@types/env';
 import { APIResponse } from './APIResponse';
+import { type preconditions as preconditionsType } from '../preconditions';
 import {
     cooldown as defaultCooldown,
     cooldownLimit as defaultCooldownLimit,
 } from '../utility/Constants';
-import { type preconditions as preconditionsType } from '../preconditions';
 
-export abstract class Command {
+export class Command {
     public readonly env: ENV;
 
     public readonly preconditions: (keyof typeof preconditionsType)[];

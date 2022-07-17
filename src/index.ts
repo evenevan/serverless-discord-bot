@@ -6,7 +6,7 @@ import {
     APIInteraction,
     APIMessageComponentInteraction,
 } from 'discord-api-types/v10';
-import { type ENV } from './@types/ENV';
+import { ENV } from './@types/env';
 import { i18n } from './locales/i18n';
 import { CommandHandler } from './structures/CommandHandler';
 import { ComponentHandler } from './structures/ComponentHandler';
@@ -53,16 +53,14 @@ export default {
             );
 
             if (interaction.type === InteractionType.ApplicationCommand) {
-                return new CommandHandler().handle(
+                return new CommandHandler(env).handle(
                     interaction as APIApplicationCommandInteraction,
-                    env,
                 );
             }
 
             if (interaction.type === InteractionType.MessageComponent) {
-                return new ComponentHandler().handle(
+                return new ComponentHandler(env).handle(
                     interaction as APIMessageComponentInteraction,
-                    env,
                 );
             }
         }
@@ -72,3 +70,10 @@ export default {
         return new Response(null, { status: 400 });
     },
 };
+
+declare module 'discord-api-types/v10' {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    interface APIBaseInteraction<Type extends InteractionType, Data> {
+        i18n: i18n;
+    }
+}

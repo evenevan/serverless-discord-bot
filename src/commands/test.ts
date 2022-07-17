@@ -6,7 +6,8 @@ import {
     ComponentType,
     ButtonStyle,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/ENV';
+import { type CustomID } from '../@types/customID';
+import { type ENV } from '../@types/env';
 import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
 import { root } from '../utility/Constants';
@@ -64,7 +65,9 @@ export class TestCommand extends Command {
                                 type: ComponentType.Button,
                                 label: 'Test',
                                 style: ButtonStyle.Primary,
-                                custom_id: 'test',
+                                custom_id: JSON.stringify({
+                                    customID: 'test',
+                                } as CustomID),
                             },
                         ],
                     },
@@ -73,19 +76,3 @@ export class TestCommand extends Command {
         });
     }
 }
-
-/**
- * const message = await new Request().request(`${root}/channels/${interaction.channel_id}/messages`, {
-            method: 'POST',
-            headers: {
-                Authorization: `Bot ${env.DISCORD_TOKEN}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                allowed_mentions: {
-                    parse: [],
-                },
-                content: i18n.getMessage('commandsTestSend'),
-            }),
-        });
- */

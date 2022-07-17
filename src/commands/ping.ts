@@ -4,7 +4,7 @@ import {
     InteractionResponseType,
     MessageFlags,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/ENV';
+import { type ENV } from '../@types/env';
 import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
 
@@ -39,33 +39,3 @@ export class PingCommand extends Command {
         });
     }
 }
-
-/**
- * fetch(`${root}/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}/messages/@original`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'User-Agent': 'DiscordBot (https://discord-test.attituding.workers.dev, 10)',
-            },
-            body: JSON.stringify({
-                content: i18n.getMessage(
-                    'commandsPingFollowUp', [
-                        endTime - startTime,
-                    ],
-                ),
-            }),
-        })
- */
-
-/**
- * await fetch(`${root}/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                content: 'e',
-                flags: MessageFlags.Ephemeral,
-            }),
-        });
- */

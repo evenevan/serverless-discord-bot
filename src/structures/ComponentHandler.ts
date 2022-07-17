@@ -1,14 +1,22 @@
-import { APIMessageComponentInteraction } from 'discord-api-types/v10';
-import { ENV } from '../@types/ENV';
-import { components } from '../components';
+import { type APIMessageComponentInteraction } from 'discord-api-types/v10';
+import { type CustomID } from '../@types/customID';
+import { type ENV } from '../@types/env';
 import { APIResponse } from './APIResponse';
+import { components } from '../components';
 
 export class ComponentHandler {
-    public handle(interaction: APIMessageComponentInteraction, env: ENV) {
-        const Component = components[interaction.data.custom_id];
+    public readonly env: ENV;
+
+    public constructor(env: ENV) {
+        this.env = env;
+    }
+
+    public handle(interaction: APIMessageComponentInteraction) {
+        const { customID } = JSON.parse(interaction.data.custom_id) as CustomID;
+        const Component = components[customID];
 
         if (Component) {
-            return new Component(env).respond(interaction);
+            return new Component(this.env).respond(interaction);
         }
 
         console.warn(

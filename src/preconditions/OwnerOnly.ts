@@ -6,7 +6,7 @@ import {
     InteractionType,
     APIUser,
 } from 'discord-api-types/v10';
-import { ENV } from '../@types/ENV';
+import { type ENV } from '../@types/env';
 import { APIResponse } from '../structures/APIResponse';
 import { type Command } from '../structures/Command';
 import { Precondition } from '../structures/Precondition';

@@ -3,7 +3,7 @@ import {
     isContextMenuApplicationCommandInteraction,
 } from 'discord-api-types/utils/v10';
 import { type APIApplicationCommandInteraction } from 'discord-api-types/v10';
-import { type ENV } from '../@types/ENV';
+import { type ENV } from '../@types/env';
 import { APIResponse } from './APIResponse';
 import { commands } from '../commands';
 import { preconditions } from '../preconditions';
@@ -12,21 +12,27 @@ import { preconditions } from '../preconditions';
 /* eslint-disable no-await-in-loop */
 
 export class CommandHandler {
-    public async handle(interaction: APIApplicationCommandInteraction, env: ENV) {
+    public readonly env: ENV;
+
+    public constructor(env: ENV) {
+        this.env = env;
+    }
+
+    public async handle(interaction: APIApplicationCommandInteraction) {
         const Command = commands[
             interaction.data.name
         ];
 
         if (Command) {
-            const command = new Command(env);
+            const command = new Command(this.env);
 
-            const preconditons = command.preconditions.map(
-                (precondition) => new preconditions[precondition](env),
+            const Preconditons = command.preconditions.map(
+                (precondition) => new preconditions[precondition](this.env),
             );
 
             if (isChatInputApplicationCommandInteraction(interaction)) {
-                for (const precondition of preconditons) {
-                    const value = await precondition.chatInput!(command, interaction);
+                for (const Precondition of Preconditons) {
+                    const value = await Precondition.chatInput!(command, interaction);
 
                     if (value instanceof APIResponse) {
                         return value;
@@ -37,8 +43,8 @@ export class CommandHandler {
             }
 
             if (isContextMenuApplicationCommandInteraction(interaction)) {
-                for (const precondition of preconditons) {
-                    const value = await precondition.contextMenu!(command, interaction);
+                for (const Precondition of Preconditons) {
+                    const value = await Precondition.contextMenu!(command, interaction);
 
                     if (value instanceof APIResponse) {
                         return value;

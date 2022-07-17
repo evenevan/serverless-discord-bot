@@ -2,13 +2,11 @@ import {
     type APIChatInputApplicationCommandInteraction,
     type APIContextMenuInteraction,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/ENV';
+import { type ENV } from '../@types/env';
 import { APIResponse } from './APIResponse';
 import { Command } from './Command';
 
-/* eslint-disable max-len */
-
-export abstract class Precondition {
+export class Precondition {
     public readonly env: ENV;
 
     public readonly name: string;
@@ -21,7 +19,6 @@ export abstract class Precondition {
         name: string,
     }) {
         this.env = env;
-
         this.name = name;
     }
 

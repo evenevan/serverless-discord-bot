@@ -1,4 +1,4 @@
-import { type ENV } from '../@types/ENV';
+import { type ENV } from '../@types/env';
 import { InviteCommand } from './invite';
 import { PingCommand } from './ping';
 import { type Command } from '../structures/Command';

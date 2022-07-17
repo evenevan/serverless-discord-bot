@@ -1,8 +1,6 @@
 import { type APIMessageComponentInteraction } from 'discord-api-types/v10';
-import { type ENV } from '../@types/ENV';
+import { type ENV } from '../@types/env';
 import { APIResponse } from './APIResponse';
-
-/* eslint-disable max-len */
 
 export abstract class Component<T extends APIMessageComponentInteraction> {
     public readonly env: ENV;
@@ -17,7 +15,6 @@ export abstract class Component<T extends APIMessageComponentInteraction> {
         name: string,
     }) {
         this.env = env;
-
         this.name = name;
     }
 

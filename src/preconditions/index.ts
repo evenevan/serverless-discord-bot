@@ -1,4 +1,4 @@
-import { type ENV } from '../@types/ENV';
+import { type ENV } from '../@types/env';
 import { CooldownPrecondition } from './Cooldown';
 import { Precondition } from '../structures/Precondition';
 import { OwnerOnlyPrecondition } from './OwnerOnly';

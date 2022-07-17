@@ -1,11 +1,7 @@
 import 'dotenv/config';
-import {
-    InteractionType,
-    type RESTPostAPIApplicationCommandsJSONBody,
-} from 'discord-api-types/v10';
+import { type RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types/v10';
+import { type ENV } from './@types/ENV';
 import { commands } from './commands';
-import { i18n } from './locales/i18n';
-import { ENV } from './@types/ENV';
 
 (async () => {
     const token = process.env.DISCORD_TOKEN;
@@ -14,7 +10,7 @@ import { ENV } from './@types/ENV';
     const env = process.env as unknown as ENV;
 
     const commandInstances = Object.values(commands).map(
-        (Command) => new Command(env),
+        (Command) => new Command!(env),
     );
 
     const globalCommands = commandInstances.filter(
@@ -79,10 +75,3 @@ import { ENV } from './@types/ENV';
         console.error(text);
     }
 })();
-
-declare module 'discord-api-types/v10' {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    interface APIBaseInteraction<Type extends InteractionType, Data> {
-        i18n: i18n;
-    }
-}
