@@ -23,6 +23,9 @@
     "preconditionsCooldown": {
         "message": "You are executing this command too fast! This command can be executed $1 time(s) per every $2 seconds. Please wait $3 more seconds before using this command again."
     },
+    "preconditionGuildOnly": {
+        "message": "This command can only be executed in a server."
+    },
     "preconditionOwnerOnly": {
         "message": "You must be an owner to execute ths command."
     }
