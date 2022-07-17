@@ -6,5 +6,6 @@ import { TestComponent } from './test';
 export const components = {
     test: TestComponent,
 } as {
+    test: new (env: ENV) => TestComponent,
     [key: string]: (new (env: ENV) => Component<APIMessageComponentInteraction>) | undefined,
 };

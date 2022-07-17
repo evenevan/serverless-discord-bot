@@ -1,9 +1,14 @@
 import { type ENV } from '../@types/env';
 import { CooldownPrecondition } from './cooldown';
+import { GuildOnlyPrecondition } from './guildOnly';
 import { OwnerOnlyPrecondition } from './ownerOnly';
-import { Precondition } from '../structures/Precondition';
 
 export const preconditions = {
-    cooldown: CooldownPrecondition as new (env: ENV) => Precondition,
-    ownerOnly: OwnerOnlyPrecondition as new (env: ENV) => Precondition,
+    cooldown: CooldownPrecondition,
+    guildOnly: GuildOnlyPrecondition,
+    ownerOnly: OwnerOnlyPrecondition,
+} as {
+    cooldown: new (env: ENV) => CooldownPrecondition,
+    guildOnly: new (env: ENV) => GuildOnlyPrecondition,
+    ownerOnly: new (env: ENV) => OwnerOnlyPrecondition,
 };

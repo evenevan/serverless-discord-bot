@@ -9,5 +9,8 @@ export const commands = {
     test: TestCommand,
     ping: PingCommand,
 } as {
+    invite: new (env: ENV) => InviteCommand,
+    test: new (env: ENV) => TestCommand,
+    ping: new (env: ENV) => PingCommand,
     [key: string]: (new (env: ENV) => Command) | undefined,
 };
