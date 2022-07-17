@@ -55,7 +55,9 @@ export class TestCommand extends Command {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: i18n.getMessage('commandsTestReply'),
+                content: i18n.getMessage(
+                    'commandsTestReply',
+                ),
                 flags: MessageFlags.Ephemeral,
                 components: [
                     {

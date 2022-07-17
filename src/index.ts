@@ -5,12 +5,14 @@ import {
     InteractionType,
     type APIInteraction,
     type APIMessageComponentInteraction,
+    APIModalSubmitInteraction,
 } from 'discord-api-types/v10';
 import { ENV } from './@types/env';
 import { i18n } from './locales/i18n';
 import { APIResponse } from './structures/APIResponse';
 import { CommandHandler } from './structures/CommandHandler';
 import { ComponentHandler } from './structures/ComponentHandler';
+import { ModalHandler } from './structures/ModalHandler';
 import { verifyKey } from './utility/verify';
 
 export default {
@@ -53,6 +55,14 @@ export default {
             if (interaction.type === InteractionType.MessageComponent) {
                 return new ComponentHandler(env).handle(
                     interaction as APIMessageComponentInteraction,
+                );
+            }
+
+            if (interaction.type === InteractionType.ModalSubmit) {
+                console.log(interaction.data);
+
+                return new ModalHandler(env).handle(
+                    interaction as APIModalSubmitInteraction,
                 );
             }
 

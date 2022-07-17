@@ -1,8 +1,8 @@
-import { type APIMessageComponentInteraction } from 'discord-api-types/v10';
+import { type APIModalSubmitInteraction } from 'discord-api-types/v10';
 import { type ENV } from '../@types/env';
 import { APIResponse } from './APIResponse';
 
-export abstract class Component<T extends APIMessageComponentInteraction> {
+export abstract class Modal {
     public readonly env: ENV;
 
     public readonly customID: string;
@@ -18,5 +18,5 @@ export abstract class Component<T extends APIMessageComponentInteraction> {
         this.customID = customID;
     }
 
-    public abstract respond(interaction: T): Promise<APIResponse>;
+    public abstract respond(interaction: APIModalSubmitInteraction): Promise<APIResponse>;
 }

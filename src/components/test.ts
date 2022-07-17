@@ -1,8 +1,10 @@
 import {
+    ComponentType,
     InteractionResponseType,
-    MessageFlags,
+    TextInputStyle,
     type APIMessageComponentButtonInteraction,
 } from 'discord-api-types/v10';
+import { type CustomID } from '../@types/customID';
 import { type ENV } from '../@types/env';
 import { APIResponse } from '../structures/APIResponse';
 import { Component } from '../structures/Component';
@@ -11,7 +13,7 @@ export class TestComponent extends Component<APIMessageComponentButtonInteractio
     public constructor(env: ENV) {
         super({
             env: env,
-            name: 'test',
+            customID: 'test',
         });
     }
 
@@ -19,12 +21,31 @@ export class TestComponent extends Component<APIMessageComponentButtonInteractio
         const { i18n } = interaction;
 
         return new APIResponse({
-            type: InteractionResponseType.ChannelMessageWithSource,
+            type: InteractionResponseType.Modal,
             data: {
-                content: i18n.getMessage(
-                    'commandsTestSend',
+                custom_id: JSON.stringify({
+                    customID: 'test',
+                } as CustomID),
+                title: i18n.getMessage(
+                    'componentsTestResponseTitle',
                 ),
-                flags: MessageFlags.Ephemeral,
+                components: [
+                    {
+                        type: ComponentType.ActionRow,
+                        components: [
+                            {
+                                type: ComponentType.TextInput,
+                                custom_id: JSON.stringify({
+                                    customID: 'test',
+                                } as CustomID),
+                                style: TextInputStyle.Short,
+                                label: i18n.getMessage(
+                                    'componentsTestResponseComponentZeroLabel',
+                                ),
+                            },
+                        ],
+                    },
+                ],
             },
         });
     }
