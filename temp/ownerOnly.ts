@@ -6,11 +6,11 @@ import {
     InteractionType,
     APIUser,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/env';
-import { APIResponse } from '../structures/APIResponse';
-import { type Command } from '../structures/Command';
-import { Precondition } from '../structures/Precondition';
-import { owners } from '../utility/Constants';
+import { type ENV } from '../src/@types/env';
+import { APIResponse } from '../src/structures/APIResponse';
+import { type Command } from '../src/structures/Command';
+import { Precondition } from '../src/structures/Precondition';
+import { owners } from '../src/utility/Constants';
 
 export class OwnerOnlyPrecondition extends Precondition {
     public constructor(env: ENV) {

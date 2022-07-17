@@ -10,10 +10,10 @@ import {
     type APIBaseInteraction,
     InteractionType,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/env';
-import { APIResponse } from '../structures/APIResponse';
-import { Command } from '../structures/Command';
-import { Precondition } from '../structures/Precondition';
+import { type ENV } from '../src/@types/env';
+import { APIResponse } from '../src/structures/APIResponse';
+import { Command } from '../src/structures/Command';
+import { Precondition } from '../src/structures/Precondition';
 
 // Variables reset after ~30 sec and requests may end up with a different global state
 
