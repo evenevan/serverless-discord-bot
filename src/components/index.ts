@@ -6,7 +6,5 @@ import { TestComponent } from './test';
 export const components = {
     test: TestComponent,
 } as {
-    [key: string]:
-    | (new (env: ENV) => Component<APIMessageComponentInteraction>)
-    | undefined,
+    [key: string]: (new (env: ENV) => Component<APIMessageComponentInteraction>) | undefined,
 };

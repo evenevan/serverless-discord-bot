@@ -5,7 +5,5 @@ import { TestModal } from './test';
 export const modals = {
     test: TestModal,
 } as {
-    [key: string]:
-    | (new (env: ENV) => Modal)
-    | undefined,
+    [key: string]: (new (env: ENV) => Modal) | undefined,
 };
