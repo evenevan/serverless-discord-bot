@@ -1,13 +1,14 @@
 import {
     type APIApplicationCommandInteraction,
-    APIPingInteraction,
+    type APIPingInteraction,
     InteractionResponseType,
     InteractionType,
-    APIInteraction,
-    APIMessageComponentInteraction,
+    type APIInteraction,
+    type APIMessageComponentInteraction,
 } from 'discord-api-types/v10';
 import { ENV } from './@types/env';
 import { i18n } from './locales/i18n';
+import { APIResponse } from './structures/APIResponse';
 import { CommandHandler } from './structures/CommandHandler';
 import { ComponentHandler } from './structures/ComponentHandler';
 import { verifyKey } from './utility/verify';
@@ -20,11 +21,9 @@ export default {
             if (!isValidRequest) {
                 console.warn('Bad request signature.');
 
-                return new Response(
-                    'Bad request signature.', {
-                        status: 401,
-                    },
-                );
+                return new Response(null, {
+                    status: 401,
+                });
             }
 
             const interaction = await request.json() as
@@ -32,16 +31,9 @@ export default {
                 | APIPingInteraction;
 
             if (interaction.type === InteractionType.Ping) {
-                return new Response(
-                    JSON.stringify({
-                        type: InteractionResponseType.Pong,
-                    }),
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    },
-                );
+                return new APIResponse({
+                    type: InteractionResponseType.Pong,
+                });
             }
 
             Object.defineProperty(
@@ -63,11 +55,22 @@ export default {
                     interaction as APIMessageComponentInteraction,
                 );
             }
+
+            console.warn(
+                'Unknown interaction type.',
+                `Type: ${interaction.type}.`,
+            );
+
+            return new Response(null, {
+                status: 400,
+            });
         }
 
         console.warn('Method used is not POST.');
 
-        return new Response(null, { status: 400 });
+        return new Response(null, {
+            status: 400,
+        });
     },
 };
 
