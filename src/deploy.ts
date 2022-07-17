@@ -4,8 +4,10 @@ import { type ENV } from './@types/ENV';
 import { commands } from './commands';
 
 (async () => {
-    const token = process.env.DISCORD_TOKEN;
-    const applicationId = process.env.DISCORD_APPLICATION_ID;
+    const {
+        DISCORD_APPLICATION_ID,
+        DISCORD_TOKEN,
+    } = process.env as unknown as ENV;
 
     const env = process.env as unknown as ENV;
 
@@ -36,10 +38,10 @@ import { commands } from './commands';
     await Promise.all(
         Object.entries(guildCommandsMap).map(async ([guildID, guildGuildCommands]) => {
             const guildResponse = await fetch(
-                `https://discord.com/api/v10/applications/${applicationId}/guilds/${guildID}/commands`, {
+                `https://discord.com/api/v10/applications/${DISCORD_APPLICATION_ID}/guilds/${guildID}/commands`, {
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bot ${token}`,
+                        Authorization: `Bot ${DISCORD_TOKEN}`,
                     },
                     method: 'PUT',
                     body: JSON.stringify(guildGuildCommands),
@@ -57,10 +59,10 @@ import { commands } from './commands';
     );
 
     const globalResponse = await fetch(
-        `https://discord.com/api/v10/applications/${applicationId}/commands`, {
+        `https://discord.com/api/v10/applications/${DISCORD_APPLICATION_ID}/commands`, {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bot ${token}`,
+                Authorization: `Bot ${DISCORD_TOKEN}`,
             },
             method: 'PUT',
             body: JSON.stringify(globalCommands),
