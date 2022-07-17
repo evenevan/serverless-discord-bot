@@ -15,7 +15,11 @@ import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
 import { Precondition } from '../structures/Precondition';
 
-// variables reset after ~30 sec, meaning that cooldowns past 30 sec ae not possible
+// Variables reset after ~30 sec and requests may end up with a different global state
+
+// Cooldowns cannot exceed 30 seconds and are not very reliable
+
+// However, they work find for this use case
 
 const cooldown: Collection<string, RateLimitManager> = new Collection();
 
