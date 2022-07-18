@@ -15,7 +15,10 @@ export const defaultResponse: Partial<APIInteractionResponse> = {
     },
 };
 
-export const owners: string[] = ['304778919368982530', '818616124332965888'];
+export const owners: string[] = [
+    '304778919368982530',
+    '818616124332965888',
+];
 
 export const restRequestTimeout: number = 5000;
 

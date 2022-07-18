@@ -6,6 +6,7 @@ import {
     ComponentType,
     ButtonStyle,
     ApplicationCommandOptionType,
+    APIApplicationCommandAutocompleteInteraction,
 } from 'discord-api-types/v10';
 import { type CustomID } from '../@types/customID';
 import { type ENV } from '../@types/env';
@@ -36,6 +37,7 @@ export class TestCommand extends Command {
                                         type: ApplicationCommandOptionType.String,
                                         name: 'string',
                                         description: 'description3',
+                                        required: false,
                                         autocomplete: true,
                                     },
                                 ],
@@ -71,7 +73,9 @@ export class TestCommand extends Command {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                content: i18n.getMessage('commandsTestSend'),
+                content: i18n.getMessage(
+                    'commandsTestChatInputSend',
+                ),
             }),
         });
 
@@ -79,7 +83,7 @@ export class TestCommand extends Command {
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
                 content: i18n.getMessage(
-                    'commandsTestResponse',
+                    'commandsTestChatInputResponse',
                 ),
                 flags: MessageFlags.Ephemeral,
                 components: [
@@ -95,6 +99,26 @@ export class TestCommand extends Command {
                                 } as CustomID),
                             },
                         ],
+                    },
+                ],
+            },
+        });
+    }
+
+    public async autocomplete(interaction: APIApplicationCommandAutocompleteInteraction) {
+        const { i18n } = interaction;
+
+        return new APIResponse({
+            type: InteractionResponseType.ApplicationCommandAutocompleteResult,
+            data: {
+                choices: [
+                    {
+                        name: i18n.getMessage(
+                            'commandsTestAutocompleteResponse', [
+                                Date.now(),
+                            ],
+                        ),
+                        value: Date.now().toString(),
                     },
                 ],
             },

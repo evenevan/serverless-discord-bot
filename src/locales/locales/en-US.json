@@ -1,15 +1,18 @@
 {
-    "commandsInviteResponse": {
+    "commandsInviteChatInputResponse": {
         "message": "[Invite this bot by clicking here!]($1 \"Click Here\")"
     },
-    "commandsPingResponse": {
+    "commandsPingChatInputResponse": {
         "message": "Pong! $1ms."
     },
-    "commandsTestSend": {
+    "commandsTestChatInputSend": {
         "message": "@everyone"
     },
-    "commandsTestResponse": {
+    "commandsTestChatInputResponse": {
         "message": "hi"
+    },
+    "commandsTestAutocompleteResponse": {
+        "message": "Date: $1"
     },
     "componentsTestResponseTitle": {
         "message": "This is a Modal"

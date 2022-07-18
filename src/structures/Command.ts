@@ -1,4 +1,5 @@
 import {
+    APIApplicationCommandAutocompleteInteraction,
     type APIChatInputApplicationCommandInteraction,
     type APIContextMenuInteraction,
     type RESTPostAPIApplicationCommandsJSONBody,
@@ -55,4 +56,6 @@ export class Command {
     public chatInput?(interaction: APIChatInputApplicationCommandInteraction): Promise<APIResponse>;
 
     public contextMenu?(interaction: APIContextMenuInteraction): Promise<APIResponse>;
+
+    public autocomplete?(interaction: APIApplicationCommandAutocompleteInteraction): Promise<APIResponse>;
 }
