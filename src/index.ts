@@ -6,10 +6,12 @@ import {
     type APIInteraction,
     type APIMessageComponentInteraction,
     APIModalSubmitInteraction,
+    APIApplicationCommandAutocompleteInteraction,
 } from 'discord-api-types/v10';
 import { ENV } from './@types/env';
 import { i18n } from './locales/i18n';
 import { APIResponse } from './structures/APIResponse';
+import { AutocompleteHandler } from './structures/AutocompleteHandler';
 import { CommandHandler } from './structures/CommandHandler';
 import { ComponentHandler } from './structures/ComponentHandler';
 import { ModalHandler } from './structures/ModalHandler';
@@ -52,6 +54,10 @@ export default {
             );
 
             switch (interaction.type) {
+                case InteractionType.ApplicationCommandAutocomplete:
+                    return new AutocompleteHandler(env).handle(
+                        interaction as APIApplicationCommandAutocompleteInteraction,
+                    );
                 case InteractionType.ApplicationCommand:
                     return new CommandHandler(env).handle(
                         interaction as APIApplicationCommandInteraction,
@@ -67,7 +73,7 @@ export default {
                 default:
                     console.warn(
                         'Unknown interaction type.',
-                        `Type: ${interaction.type}.`,
+                        `Type: ${(interaction as APIInteraction).type}.`,
                     );
 
                     return new Response(null, {
@@ -83,10 +89,3 @@ export default {
         });
     },
 };
-
-declare module 'discord-api-types/v10' {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    interface APIBaseInteraction<Type extends InteractionType, Data> {
-        i18n: i18n;
-    }
-}

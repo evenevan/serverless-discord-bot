@@ -1,7 +1,11 @@
 import 'dotenv/config';
-import { type RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types/v10';
+import {
+    type InteractionType,
+    type RESTPostAPIApplicationCommandsJSONBody,
+} from 'discord-api-types/v10';
 import { type ENV } from './@types/ENV';
 import { commands } from './commands';
+import { type i18n } from './locales/i18n';
 
 (async () => {
     const {
@@ -77,3 +81,10 @@ import { commands } from './commands';
         console.error(text);
     }
 })();
+
+declare module 'discord-api-types/v10' {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    interface APIBaseInteraction<Type extends InteractionType, Data> {
+        i18n: i18n;
+    }
+}

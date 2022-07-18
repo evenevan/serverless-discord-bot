@@ -5,6 +5,7 @@ import {
     MessageFlags,
     ComponentType,
     ButtonStyle,
+    ApplicationCommandOptionType,
 } from 'discord-api-types/v10';
 import { type CustomID } from '../@types/customID';
 import { type ENV } from '../@types/env';
@@ -20,6 +21,28 @@ export class TestCommand extends Command {
             structure: {
                 name: 'test',
                 description: 'TESTING',
+                options: [
+                    {
+                        type: ApplicationCommandOptionType.SubcommandGroup,
+                        name: 'subcommandgroup',
+                        description: 'fescription1',
+                        options: [
+                            {
+                                type: ApplicationCommandOptionType.Subcommand,
+                                name: 'subcommand',
+                                description: 'fescription2',
+                                options: [
+                                    {
+                                        type: ApplicationCommandOptionType.String,
+                                        name: 'string',
+                                        description: 'description3',
+                                        autocomplete: true,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
             },
             cooldown: 10000,
         });
