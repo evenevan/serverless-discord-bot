@@ -19,7 +19,7 @@ export class AutocompleteHandler {
 
         console.warn(
             `${this.constructor.name}:`,
-            'Received autocomplete whose command that was not found in export.',
+            'Received autocomplete command was not found in export.',
             `Command: ${interaction.data.name}.`,
         );
 
