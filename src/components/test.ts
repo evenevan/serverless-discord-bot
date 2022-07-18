@@ -36,12 +36,28 @@ export class TestComponent extends Component<APIMessageComponentButtonInteractio
                             {
                                 type: ComponentType.TextInput,
                                 custom_id: JSON.stringify({
-                                    customID: 'test',
+                                    customID: 'input1',
                                 } as CustomID),
                                 style: TextInputStyle.Short,
                                 label: i18n.getMessage(
                                     'componentsTestResponseComponentsZeroLabel',
                                 ),
+                            },
+                        ],
+                    },
+                    {
+                        type: ComponentType.ActionRow,
+                        components: [
+                            {
+                                type: ComponentType.TextInput,
+                                custom_id: JSON.stringify({
+                                    customID: 'input2',
+                                } as CustomID),
+                                style: TextInputStyle.Paragraph,
+                                label: i18n.getMessage(
+                                    'componentsTestResponseComponentsOneLabel',
+                                ),
+                                required: false,
                             },
                         ],
                     },

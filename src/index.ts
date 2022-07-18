@@ -48,7 +48,7 @@ export default {
                 },
             );
 
-            console.warn(
+            console.log(
                 'Received interaction.',
                 `Type: ${interaction.type}.`,
             );

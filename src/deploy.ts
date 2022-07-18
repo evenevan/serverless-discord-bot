@@ -27,7 +27,7 @@ import { type i18n } from './locales/i18n';
         (command) => Number(command.guildIDs?.length) > 0,
     );
 
-    const guildCommandsMap = { } as {
+    const guildCommandsMap = {} as {
         [key: string]: RESTPostAPIApplicationCommandsJSONBody[] | undefined
     };
 

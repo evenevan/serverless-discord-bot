@@ -20,6 +20,9 @@
     "componentsTestResponseComponentsZeroLabel": {
         "message": "Random Text Here"
     },
+    "componentsTestResponseComponentsOneLabel": {
+        "message": "More Random Text Here"
+    },
     "modalsTestResponse": {
         "message": "Received modal interaction!"
     },
