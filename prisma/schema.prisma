@@ -8,6 +8,7 @@ datasource db {
 }
 
 model users {
-  id    String @id
-  added Int
+  id           String @id
+  added        Int
+  interactions Int    @default(1)
 }

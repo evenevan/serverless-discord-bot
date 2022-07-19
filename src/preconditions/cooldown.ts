@@ -1,4 +1,4 @@
-import Collection from '@discordjs/collection';
+import { Collection } from '@discordjs/collection';
 import {
     RateLimit,
     RateLimitManager,
@@ -19,7 +19,7 @@ import { Precondition } from '../structures/Precondition';
 
 // Cooldowns cannot exceed 30 seconds and are not very reliable
 
-// However, they work find for this use case
+// However, they work fine for this use case
 
 const cooldown: Collection<string, RateLimitManager> = new Collection();
 

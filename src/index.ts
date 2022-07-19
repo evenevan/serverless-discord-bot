@@ -14,11 +14,12 @@ import { APIResponse } from './structures/APIResponse';
 import { AutocompleteHandler } from './structures/AutocompleteHandler';
 import { CommandHandler } from './structures/CommandHandler';
 import { ComponentHandler } from './structures/ComponentHandler';
+import { Database } from './structures/Database';
 import { ModalHandler } from './structures/ModalHandler';
 import { verifyKey } from './utility/verify';
 
 export default {
-    fetch: async (request: Request, env: ENV) => {
+    fetch: async (request: Request, env: ENV, context: ExecutionContext) => {
         if (request.method === 'POST') {
             const isValidRequest = await verifyKey(request, env);
 
@@ -52,6 +53,40 @@ export default {
                 'Received interaction.',
                 `Type: ${interaction.type}.`,
             );
+
+            // Some weird logic (probably on Prisma's side) causes this to not run without the IIFE block
+            context.waitUntil((async () => {
+                try {
+                    const userID = (interaction.member?.user.id ?? interaction.user?.id)!;
+
+                    const user = await new Database(env).users.findUnique({
+                        select: {
+                            added: true,
+                            interactions: true,
+                        },
+                        where: {
+                            id: userID,
+                        },
+                    });
+
+                    await new Database(env).users.upsert({
+                        create: {
+                            id: userID,
+                            added: Date.now(),
+                        },
+                        update: {
+                            interactions: user
+                                ? user.interactions + 1
+                                : 0,
+                        },
+                        where: {
+                            id: userID,
+                        },
+                    });
+                } catch (error) {
+                    console.error((error as Error)?.stack);
+                }
+            })());
 
             switch (interaction.type) {
                 case InteractionType.ApplicationCommandAutocomplete:
