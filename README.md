@@ -1,13 +1,15 @@
 A serverless Discord Bot designed for Cloudflare Workers.
 
 Average CPU Time (roughly):
-- 50th percentile: 2 milliseconds
-- 75th percentile: 2.5 milliseconds
-- 99th percentile: 3.5 milliseconds
-- 99.9th percentile: 3.5 milliseconds
+- Median: 3.5 milliseconds
+- 50th percentile: 3.5 milliseconds
+- 75th percentile: 4.4 milliseconds
+- 99th percentile: 5.1 milliseconds
+- 99.9th percentile: 5.2 milliseconds
 
 Features:
 - Basic i18n implementation
+- Built in database via Prisma (WIP)
 - Chat input support (Slash commands)
 - Context menu support (Right click actions)
 - Easy deployment of commands
