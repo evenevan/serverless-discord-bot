@@ -1,4 +1,4 @@
-name = "discord-test"
+name = "cloudflare"
 compatibility_date = "2022-06-29"
 main = "src/index.ts"
 node_compat = true
