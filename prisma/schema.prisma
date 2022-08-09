@@ -8,7 +8,16 @@ datasource db {
 }
 
 model users {
-  id           String @id
-  added        Int
+  id           String @id @db.Char(20)
   interactions Int    @default(1)
+}
+
+model interactions {
+  id        String  @id @db.Char(20)
+  user_id   String  @db.Char(20)
+  type      Int
+  guild_id  String? @db.Char(20)
+  name      String? @db.Char(100)
+  options   Json[]  @default([]) @db.Json
+  custom_id String? @db.Char(250)
 }

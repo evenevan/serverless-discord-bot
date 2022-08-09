@@ -5,10 +5,7 @@ let client: PrismaClient | null = null;
 
 export class Database extends PrismaClient {
     constructor(env: ENV) {
-        console.log(env);
         if (client === null) {
-            // Prisma is pulling a stupid and not setting this properly
-
             super({
                 datasources: {
                     db: {

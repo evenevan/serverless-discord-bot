@@ -1,6 +1,6 @@
 A serverless Discord Bot designed for Cloudflare Workers.
 
-Average CPU Time (roughly):
+Average CPU Time (roughly) w/o database:
 - Median: 3.5 milliseconds
 - 50th percentile: 3.5 milliseconds
 - 75th percentile: 4.4 milliseconds
@@ -21,12 +21,13 @@ Features:
 Secrets: DATABASE_URL, DISCORD_APPLICATION_ID, DISCORD_TOKEN, DISCORD_PUBLIC_KEY
 
 1) Run "npm i"
-2) Run "npx prisma generate --data-proxy"
-3) Install Wrangler globally with "npm i wrangler -g"
-4) Create a Cloudflare Worker and set its name in the wrangler.toml file
-5) Create an application at https://discord.dev
-6) Create a Prisma Proxy at https://cloud.prisma.io
-7) Set the variables/secrets in both the Worker dashboard and the wrangler.htoml file
-8) Run "npm run dev" for local testing (use ngrok or similar to route localhost)
-9) Run "npm run publish" to deploy to Cloudflare Workers
-10) Set your Worker's link in the interaction endpoint URL of your Discord application
+2) Install Wrangler globally with "npm i wrangler -g"
+3) Set environment variables locally (see sample.env file)
+4) Run "npm run generate"
+5) Create a Cloudflare Worker and set its name in the wrangler.toml file
+6) Create an application at https://discord.dev
+7) Create a Prisma Proxy at https://cloud.prisma.io
+8) Set environment variables/secrets in both the Worker dashboard and the wrangler.toml file
+9) Run "npm run dev" for local testing (use ngrok or similar to route localhost)
+10) Run "npm run publish" to deploy to Cloudflare Workers
+11) Set your Worker's link in the interaction endpoint URL of your Discord application

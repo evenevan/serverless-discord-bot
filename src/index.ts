@@ -52,35 +52,44 @@ export default {
             console.log(
                 'Received interaction.',
                 `Type: ${interaction.type}.`,
+                Date.now(),
+                new Date(),
             );
 
             // Some weird logic (probably on Prisma's side) causes this to not run without the IIFE block
             context.waitUntil((async () => {
                 try {
-                    const userID = (interaction.member?.user.id ?? interaction.user?.id)!;
-
-                    const user = await new Database(env).users.findUnique({
-                        select: {
-                            added: true,
-                            interactions: true,
-                        },
-                        where: {
-                            id: userID,
-                        },
-                    });
+                    const userId = (interaction.member?.user.id ?? interaction.user?.id)!;
 
                     await new Database(env).users.upsert({
                         create: {
-                            id: userID,
-                            added: Date.now(),
+                            id: userId,
                         },
                         update: {
-                            interactions: user
-                                ? user.interactions + 1
-                                : 0,
+                            interactions: {
+                                increment: 1,
+                            },
                         },
                         where: {
-                            id: userID,
+                            id: userId,
+                        },
+                    });
+
+                    await new Database(env).interactions.create({
+                        data: {
+                            id: interaction.id,
+                            user_id: userId,
+                            type: interaction.type,
+                            guild_id: interaction.guild_id,
+                            name: 'name' in interaction.data
+                                ? interaction.data.name
+                                : null,
+                            options: 'options' in interaction.data
+                                ? JSON.parse(JSON.stringify(interaction.data.options ?? []))
+                                : [],
+                            custom_id: 'custom_id' in interaction.data
+                                ? interaction.data.custom_id
+                                : null,
                         },
                     });
                 } catch (error) {
