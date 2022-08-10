@@ -1,5 +1,6 @@
 import { isGuildInteraction } from 'discord-api-types/utils/v10';
 import {
+    type APIApplicationCommandInteraction,
     type APIBaseInteraction,
     type APIChatInputApplicationCommandInteraction,
     type APIContextMenuInteraction,
@@ -21,21 +22,14 @@ export class GuildOnlyPrecondition extends Precondition {
     }
 
     public async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
-        if (isGuildInteraction(interaction)) {
-            return undefined;
-        }
-
-        console.warn(
-            `${this.constructor.name}:`,
-            'User failed guildOnly precondition.',
-            `Command: ${command.name}.`,
-            `User: ${interaction.member?.user.id ?? interaction.user?.id}.`,
-        );
-
-        return this.error(interaction);
+        return this.guildOnly(command, interaction);
     }
 
     public async contextMenu(command: Command, interaction: APIContextMenuInteraction) {
+        return this.guildOnly(command, interaction);
+    }
+
+    public async guildOnly(command: Command, interaction: APIApplicationCommandInteraction) {
         if (isGuildInteraction(interaction)) {
             return undefined;
         }

@@ -1,8 +1,8 @@
 import {
     type APIApplicationCommandAutocompleteInteraction,
     type APIChatInputApplicationCommandInteraction,
+    APIContextMenuInteraction,
     type APIDMChannel,
-    type APIUserApplicationCommandInteraction,
     ApplicationCommandOptionType,
     ApplicationCommandType,
     ButtonStyle,
@@ -34,12 +34,12 @@ export class TestCommand extends Command {
                     {
                         type: ApplicationCommandOptionType.SubcommandGroup,
                         name: 'subcommandgroup',
-                        description: 'fescription1',
+                        description: 'description1',
                         options: [
                             {
                                 type: ApplicationCommandOptionType.Subcommand,
                                 name: 'subcommand',
-                                description: 'fescription2',
+                                description: 'description2',
                                 options: [
                                     {
                                         type: ApplicationCommandOptionType.String,
@@ -58,6 +58,10 @@ export class TestCommand extends Command {
             user: {
                 name: this.name,
                 type: ApplicationCommandType.User,
+            },
+            message: {
+                name: this.name,
+                type: ApplicationCommandType.Message,
             },
         };
     }
@@ -117,17 +121,24 @@ export class TestCommand extends Command {
         });
     }
 
-    public async contextMenu(interaction: APIUserApplicationCommandInteraction) {
+    public async contextMenu(interaction: APIContextMenuInteraction) {
         const { i18n } = interaction;
 
-        const userId = Object.values(interaction.data.resolved.users)[0].id;
+        const userId = 'users' in interaction.data.resolved
+            ? Object.values(interaction.data.resolved.users)[0].id
+            : null;
+
+        const messageId = 'messages' in interaction.data.resolved
+            ? Object.values(interaction.data.resolved.messages)[0].id
+            : null;
 
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
                 content: i18n.getMessage(
                     'commandsTestContextResponse', [
-                        userId,
+                        String(messageId),
+                        String(userId),
                     ],
                 ),
                 flags: MessageFlags.Ephemeral,

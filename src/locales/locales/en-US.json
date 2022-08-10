@@ -12,7 +12,7 @@
         "message": "hi"
     },
     "commandsTestContextResponse": {
-        "message": "User Id: $1"
+        "message": "Message Id: $1, User Id: $2"
     },
     "commandsTestAutocompleteResponse": {
         "message": "Date: $1"

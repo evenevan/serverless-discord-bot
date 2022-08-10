@@ -4,6 +4,7 @@ import {
     RateLimitManager,
 } from '@sapphire/ratelimits';
 import {
+    type APIApplicationCommandInteraction,
     type APIBaseInteraction,
     type APIChatInputApplicationCommandInteraction,
     type APIContextMenuInteraction,
@@ -33,32 +34,14 @@ export class CooldownPrecondition extends Precondition {
     }
 
     public async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
-        const rateLimitManager = cooldown.ensure(
-            command.name,
-            () => new RateLimitManager(command.cooldown, command.cooldownLimit),
-        );
-
-        const rateLimit = rateLimitManager.acquire(
-            (interaction.member?.user ?? interaction.user)!.id,
-        );
-
-        if (rateLimit.limited) {
-            console.warn(
-                `${this.constructor.name}:`,
-                'User failed cooldown precondition.',
-                `Command: ${command.name}.`,
-                `User: ${interaction.member?.user.id ?? interaction.user?.id}.`,
-            );
-
-            return this.error(command, rateLimit, interaction);
-        }
-
-        rateLimit.consume();
-
-        return undefined;
+        return this.cooldown(command, interaction);
     }
 
     public async contextMenu(command: Command, interaction: APIContextMenuInteraction) {
+        return this.cooldown(command, interaction);
+    }
+
+    public async cooldown(command: Command, interaction: APIApplicationCommandInteraction) {
         const rateLimitManager = cooldown.ensure(
             command.name,
             () => new RateLimitManager(command.cooldown, command.cooldownLimit),

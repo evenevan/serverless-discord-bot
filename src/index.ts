@@ -52,8 +52,6 @@ export default {
             console.log(
                 'Received interaction.',
                 `Type: ${interaction.type}.`,
-                Date.now(),
-                new Date(),
             );
 
             // Some weird logic (probably on Prisma's side) causes this to not run without the IIFE block

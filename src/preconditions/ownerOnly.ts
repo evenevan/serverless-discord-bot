@@ -1,4 +1,5 @@
 import {
+    type APIApplicationCommandInteraction,
     type APIBaseInteraction,
     type APIChatInputApplicationCommandInteraction,
     APIContextMenuInteraction,
@@ -22,23 +23,14 @@ export class OwnerOnlyPrecondition extends Precondition {
     }
 
     public async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
-        const user = (interaction.member?.user ?? interaction.user) as APIUser;
-
-        if (owners.includes(user.id)) {
-            return undefined;
-        }
-
-        console.warn(
-            `${this.constructor.name}:`,
-            'User failed ownerOnly precondition.',
-            `Command: ${command.name}.`,
-            `User: ${interaction.member?.user.id ?? interaction.user?.id}.`,
-        );
-
-        return this.error(interaction);
+        return this.ownerOnly(command, interaction);
     }
 
     public async contextMenu(command: Command, interaction: APIContextMenuInteraction) {
+        return this.ownerOnly(command, interaction);
+    }
+
+    public async ownerOnly(command: Command, interaction: APIApplicationCommandInteraction) {
         const user = (interaction.member?.user ?? interaction.user) as APIUser;
 
         if (owners.includes(user.id)) {
