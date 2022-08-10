@@ -1,8 +1,8 @@
 import {
+    type APIMessageComponentButtonInteraction,
     ComponentType,
     InteractionResponseType,
     TextInputStyle,
-    type APIMessageComponentButtonInteraction,
 } from 'discord-api-types/v10';
 import { type CustomID } from '../@types/customID';
 import { type ENV } from '../@types/env';

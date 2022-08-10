@@ -1,11 +1,11 @@
 import { isGuildInteraction } from 'discord-api-types/utils/v10';
 import {
+    type APIBaseInteraction,
     type APIChatInputApplicationCommandInteraction,
     type APIContextMenuInteraction,
     InteractionResponseType,
-    MessageFlags,
-    type APIBaseInteraction,
     InteractionType,
+    MessageFlags,
 } from 'discord-api-types/v10';
 import { type ENV } from '../@types/env';
 import { APIResponse } from '../structures/APIResponse';

@@ -1,14 +1,14 @@
 import {
+    type APIApplicationCommandAutocompleteInteraction,
     type APIChatInputApplicationCommandInteraction,
     type APIDMChannel,
+    type APIUserApplicationCommandInteraction,
+    ApplicationCommandOptionType,
+    ApplicationCommandType,
+    ButtonStyle,
+    ComponentType,
     InteractionResponseType,
     MessageFlags,
-    ComponentType,
-    ButtonStyle,
-    ApplicationCommandOptionType,
-    type APIApplicationCommandAutocompleteInteraction,
-    ApplicationCommandType,
-    type APIUserApplicationCommandInteraction,
 } from 'discord-api-types/v10';
 import { type CustomID } from '../@types/customID';
 import { type ENV } from '../@types/env';

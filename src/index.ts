@@ -1,12 +1,12 @@
 import {
+    APIApplicationCommandAutocompleteInteraction,
     type APIApplicationCommandInteraction,
-    type APIPingInteraction,
-    InteractionResponseType,
-    InteractionType,
     type APIInteraction,
     type APIMessageComponentInteraction,
     APIModalSubmitInteraction,
-    APIApplicationCommandAutocompleteInteraction,
+    type APIPingInteraction,
+    InteractionResponseType,
+    InteractionType,
 } from 'discord-api-types/v10';
 import { ENV } from './@types/env';
 import { i18n } from './locales/i18n';

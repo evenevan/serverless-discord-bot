@@ -1,8 +1,8 @@
 import {
     type APIChatInputApplicationCommandInteraction,
+    ApplicationCommandType,
     InteractionResponseType,
     MessageFlags,
-    ApplicationCommandType,
 } from 'discord-api-types/v10';
 import { type ENV } from '../@types/env';
 import { APIResponse } from '../structures/APIResponse';
