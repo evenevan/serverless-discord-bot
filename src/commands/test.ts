@@ -6,7 +6,9 @@ import {
     ComponentType,
     ButtonStyle,
     ApplicationCommandOptionType,
-    APIApplicationCommandAutocompleteInteraction,
+    type APIApplicationCommandAutocompleteInteraction,
+    ApplicationCommandType,
+    type APIUserApplicationCommandInteraction,
 } from 'discord-api-types/v10';
 import { type CustomID } from '../@types/customID';
 import { type ENV } from '../@types/env';
@@ -17,11 +19,17 @@ import { root } from '../utility/Constants';
 export class TestCommand extends Command {
     public constructor(env: ENV) {
         super({
+            name: 'test',
+            description: 'TESTING',
             env: env,
             preconditions: ['cooldown', 'ownerOnly'],
-            structure: {
-                name: 'test',
-                description: 'TESTING',
+            cooldown: 10000,
+        });
+
+        this.structure = {
+            chatInput: {
+                name: this.name,
+                description: this.description,
                 options: [
                     {
                         type: ApplicationCommandOptionType.SubcommandGroup,
@@ -45,9 +53,13 @@ export class TestCommand extends Command {
                         ],
                     },
                 ],
+                type: ApplicationCommandType.ChatInput,
             },
-            cooldown: 10000,
-        });
+            user: {
+                name: this.name,
+                type: ApplicationCommandType.User,
+            },
+        };
     }
 
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
@@ -101,6 +113,24 @@ export class TestCommand extends Command {
                         ],
                     },
                 ],
+            },
+        });
+    }
+
+    public async contextMenu(interaction: APIUserApplicationCommandInteraction) {
+        const { i18n } = interaction;
+
+        const userId = Object.values(interaction.data.resolved.users)[0].id;
+
+        return new APIResponse({
+            type: InteractionResponseType.ChannelMessageWithSource,
+            data: {
+                content: i18n.getMessage(
+                    'commandsTestContextResponse', [
+                        userId,
+                    ],
+                ),
+                flags: MessageFlags.Ephemeral,
             },
         });
     }

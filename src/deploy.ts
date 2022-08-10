@@ -21,7 +21,7 @@ import { type i18n } from './locales/i18n';
 
     const globalCommands = commandInstances.filter(
         (command) => typeof command.guildIDs === 'undefined',
-    ).map((command) => command.structure);
+    ).map((command) => Object.values(command.structure)).flat(1);
 
     const guildCommands = commandInstances.filter(
         (command) => Number(command.guildIDs?.length) > 0,
@@ -35,7 +35,9 @@ import { type i18n } from './locales/i18n';
         guildCommand.guildIDs?.forEach((guildID) => {
             guildCommandsMap[guildID] ??= [];
 
-            guildCommandsMap[guildID]?.push(guildCommand.structure);
+            guildCommandsMap[guildID]?.push(
+                ...Object.values(guildCommand.structure),
+            );
         });
     });
 

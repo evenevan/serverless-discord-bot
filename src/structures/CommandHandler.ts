@@ -26,13 +26,13 @@ export class CommandHandler {
         if (Command) {
             const command = new Command(this.env);
 
-            const Preconditons = command.preconditions.map(
+            const preconditons = command.preconditions.map(
                 (precondition) => new preconditions[precondition](this.env),
             );
 
             if (isChatInputApplicationCommandInteraction(interaction)) {
-                for (const Precondition of Preconditons) {
-                    const value = await Precondition.chatInput!(command, interaction);
+                for (const precondition of preconditons) {
+                    const value = await precondition.chatInput!(command, interaction);
 
                     if (value instanceof APIResponse) {
                         return value;
@@ -43,8 +43,8 @@ export class CommandHandler {
             }
 
             if (isContextMenuApplicationCommandInteraction(interaction)) {
-                for (const Precondition of Preconditons) {
-                    const value = await Precondition.contextMenu!(command, interaction);
+                for (const precondition of preconditons) {
+                    const value = await precondition.contextMenu!(command, interaction);
 
                     if (value instanceof APIResponse) {
                         return value;

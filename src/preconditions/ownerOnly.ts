@@ -5,6 +5,7 @@ import {
     type APIBaseInteraction,
     InteractionType,
     APIUser,
+    APIContextMenuInteraction,
 } from 'discord-api-types/v10';
 import { type ENV } from '../@types/env';
 import { APIResponse } from '../structures/APIResponse';
@@ -30,7 +31,24 @@ export class OwnerOnlyPrecondition extends Precondition {
         console.warn(
             `${this.constructor.name}:`,
             'User failed ownerOnly precondition.',
-            `Command: ${command.structure.name}.`,
+            `Command: ${command.name}.`,
+            `User: ${interaction.member?.user.id ?? interaction.user?.id}.`,
+        );
+
+        return this.error(interaction);
+    }
+
+    public async contextMenu(command: Command, interaction: APIContextMenuInteraction) {
+        const user = (interaction.member?.user ?? interaction.user) as APIUser;
+
+        if (owners.includes(user.id)) {
+            return undefined;
+        }
+
+        console.warn(
+            `${this.constructor.name}:`,
+            'User failed ownerOnly precondition.',
+            `Command: ${command.name}.`,
             `User: ${interaction.member?.user.id ?? interaction.user?.id}.`,
         );
 

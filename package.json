@@ -22,7 +22,8 @@
         "@sapphire/ratelimits": "^2.4.4",
         "@sapphire/snowflake": "^3.2.2",
         "deepmerge-ts": "^4.2.1",
-        "discord-api-types": "^0.37.1"
+        "discord-api-types": "^0.37.1",
+        "dotenv": "^16.0.1"
     },
     "scripts": {
         "generate": "prisma generate --data-proxy",

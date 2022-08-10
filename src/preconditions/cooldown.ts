@@ -4,11 +4,12 @@ import {
     RateLimitManager,
 } from '@sapphire/ratelimits';
 import {
-    type APIChatInputApplicationCommandInteraction,
-    InteractionResponseType,
-    MessageFlags,
     type APIBaseInteraction,
+    type APIChatInputApplicationCommandInteraction,
+    type APIContextMenuInteraction,
+    InteractionResponseType,
     InteractionType,
+    MessageFlags,
 } from 'discord-api-types/v10';
 import { type ENV } from '../@types/env';
 import { APIResponse } from '../structures/APIResponse';
@@ -33,7 +34,7 @@ export class CooldownPrecondition extends Precondition {
 
     public async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
         const rateLimitManager = cooldown.ensure(
-            command.structure.name,
+            command.name,
             () => new RateLimitManager(command.cooldown, command.cooldownLimit),
         );
 
@@ -45,7 +46,33 @@ export class CooldownPrecondition extends Precondition {
             console.warn(
                 `${this.constructor.name}:`,
                 'User failed cooldown precondition.',
-                `Command: ${command.structure.name}.`,
+                `Command: ${command.name}.`,
+                `User: ${interaction.member?.user.id ?? interaction.user?.id}.`,
+            );
+
+            return this.error(command, rateLimit, interaction);
+        }
+
+        rateLimit.consume();
+
+        return undefined;
+    }
+
+    public async contextMenu(command: Command, interaction: APIContextMenuInteraction) {
+        const rateLimitManager = cooldown.ensure(
+            command.name,
+            () => new RateLimitManager(command.cooldown, command.cooldownLimit),
+        );
+
+        const rateLimit = rateLimitManager.acquire(
+            (interaction.member?.user ?? interaction.user)!.id,
+        );
+
+        if (rateLimit.limited) {
+            console.warn(
+                `${this.constructor.name}:`,
+                'User failed cooldown precondition.',
+                `Command: ${command.name}.`,
                 `User: ${interaction.member?.user.id ?? interaction.user?.id}.`,
             );
 

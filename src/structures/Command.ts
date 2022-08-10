@@ -13,11 +13,13 @@ import {
 } from '../utility/Constants';
 
 export class Command {
+    public readonly name: string;
+
+    public readonly description: string;
+
     public readonly env: ENV;
 
     public readonly preconditions: (keyof typeof preconditionsType)[];
-
-    public readonly structure: RESTPostAPIApplicationCommandsJSONBody;
 
     public readonly cooldown: number;
 
@@ -25,26 +27,36 @@ export class Command {
 
     public readonly guildIDs?: string[];
 
+    public structure!: {
+        chatInput?: RESTPostAPIApplicationCommandsJSONBody,
+        user?: RESTPostAPIApplicationCommandsJSONBody,
+        message?: RESTPostAPIApplicationCommandsJSONBody,
+    };
+
     public constructor({
+        name,
+        description,
         env,
         preconditions,
-        structure,
         cooldown,
         cooldownLimit,
         guildIDs,
     }: {
+        name: string,
+        description: string,
         env: ENV,
         preconditions: (keyof typeof preconditionsType)[],
-        structure: RESTPostAPIApplicationCommandsJSONBody,
         cooldown?: number,
         cooldownLimit?: number,
         guildIDs?: string[],
     }) {
+        this.name = name;
+
+        this.description = description;
+
         this.env = env;
 
         this.preconditions = preconditions;
-
-        this.structure = structure;
 
         this.cooldown = cooldown ?? defaultCooldown;
 

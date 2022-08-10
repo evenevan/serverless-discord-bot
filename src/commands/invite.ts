@@ -2,6 +2,7 @@ import {
     type APIChatInputApplicationCommandInteraction,
     InteractionResponseType,
     MessageFlags,
+    ApplicationCommandType,
 } from 'discord-api-types/v10';
 import { type ENV } from '../@types/env';
 import { APIResponse } from '../structures/APIResponse';
@@ -10,13 +11,19 @@ import { Command } from '../structures/Command';
 export class InviteCommand extends Command {
     public constructor(env: ENV) {
         super({
+            name: 'invite',
+            description: 'Get an invite link to add the bot to your server',
             env: env,
             preconditions: ['cooldown'],
-            structure: {
-                name: 'invite',
-                description: 'Get an invite link to add the bot to your server',
-            },
         });
+
+        this.structure = {
+            chatInput: {
+                name: this.name,
+                description: this.description,
+                type: ApplicationCommandType.ChatInput,
+            },
+        };
     }
 
     public async chatInput(interaction: APIChatInputApplicationCommandInteraction) {

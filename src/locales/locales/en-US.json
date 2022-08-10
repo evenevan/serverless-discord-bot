@@ -11,6 +11,9 @@
     "commandsTestChatInputResponse": {
         "message": "hi"
     },
+    "commandsTestContextResponse": {
+        "message": "User Id: $1"
+    },
     "commandsTestAutocompleteResponse": {
         "message": "Date: $1"
     },
