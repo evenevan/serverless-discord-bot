@@ -1,6 +1,6 @@
 {
     "license": "MIT",
-    "author": "Attituding <Attituding@outlook.com>",
+    "author": "Attituding <attituding@outlook.com>",
     "main": "dist/index.js",
     "devDependencies": {
         "@cloudflare/workers-types": "^3.14.1",
