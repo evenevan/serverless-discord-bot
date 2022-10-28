@@ -1,13 +1,13 @@
-import {
-    type APIChatInputApplicationCommandInteraction,
-    type APIContextMenuInteraction,
+import type {
+    APIChatInputApplicationCommandInteraction,
+    APIContextMenuInteraction,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/env';
-import { APIResponse } from './APIResponse';
-import { Command } from './Command';
+import type { Env } from '../@types/Env';
+import type { APIResponse } from './APIResponse';
+import type { Command } from './Command';
 
 export class Precondition {
-    public readonly env: ENV;
+    public readonly env: Env;
 
     public readonly name: string;
 
@@ -15,7 +15,7 @@ export class Precondition {
         env,
         name,
     }: {
-        env: ENV,
+        env: Env,
         name: string,
     }) {
         this.env = env;

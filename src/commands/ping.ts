@@ -5,12 +5,12 @@ import {
     InteractionResponseType,
     MessageFlags,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/env';
+import type { Env } from '../@types/Env';
 import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
 
 export class PingCommand extends Command {
-    public constructor(env: ENV) {
+    public constructor(env: Env) {
         super({
             name: 'ping',
             description: 'Pong!',
@@ -27,7 +27,7 @@ export class PingCommand extends Command {
         };
     }
 
-    public async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
+    public override async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
         const { i18n } = interaction;
 
         const startTime = DiscordSnowflake.timestampFrom(interaction.id);

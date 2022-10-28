@@ -1,12 +1,12 @@
-import {
+import type {
     APIApplicationCommandAutocompleteInteraction,
-    type APIChatInputApplicationCommandInteraction,
-    type APIContextMenuInteraction,
-    type RESTPostAPIApplicationCommandsJSONBody,
+    APIChatInputApplicationCommandInteraction,
+    APIContextMenuInteraction,
+    RESTPostAPIApplicationCommandsJSONBody,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/env';
-import { APIResponse } from './APIResponse';
-import { type preconditions as preconditionsType } from '../preconditions';
+import type { Env } from '../@types/Env';
+import type { APIResponse } from './APIResponse';
+import type { preconditions as preconditionsType } from '../preconditions';
 import {
     cooldown as defaultCooldown,
     cooldownLimit as defaultCooldownLimit,
@@ -17,7 +17,7 @@ export class Command {
 
     public readonly description: string;
 
-    public readonly env: ENV;
+    public readonly env: Env;
 
     public readonly preconditions: (keyof typeof preconditionsType)[];
 
@@ -44,7 +44,7 @@ export class Command {
     }: {
         name: string,
         description: string,
-        env: ENV,
+        env: Env,
         preconditions: (keyof typeof preconditionsType)[],
         cooldown?: number,
         cooldownLimit?: number,

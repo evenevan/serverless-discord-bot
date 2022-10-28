@@ -20,7 +20,7 @@
             }
         ],
         "class-methods-use-this": ["off"],
-        "eol-last": ["error", "never"],
+        "eol-last": ["error", "always"],
         "function-paren-newline": ["error", "consistent"],
         "import/prefer-default-export": ["off"],
         "indent": "off",

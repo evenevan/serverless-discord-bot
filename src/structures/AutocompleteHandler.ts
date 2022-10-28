@@ -1,12 +1,12 @@
-import { type APIApplicationCommandAutocompleteInteraction } from 'discord-api-types/v10';
-import { type ENV } from '../@types/env';
+import type { APIApplicationCommandAutocompleteInteraction } from 'discord-api-types/v10';
+import type { Env } from '../@types/Env';
 import { commands } from '../commands';
 import { APIResponse } from './APIResponse';
 
 export class AutocompleteHandler {
-    public readonly env: ENV;
+    public readonly env: Env;
 
-    public constructor(env: ENV) {
+    public constructor(env: Env) {
         this.env = env;
     }
 

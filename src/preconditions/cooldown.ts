@@ -12,9 +12,9 @@ import {
     InteractionType,
     MessageFlags,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/env';
+import type { Env } from '../@types/Env';
 import { APIResponse } from '../structures/APIResponse';
-import { Command } from '../structures/Command';
+import type { Command } from '../structures/Command';
 import { Precondition } from '../structures/Precondition';
 
 // Variables reset after ~30 sec and requests may end up with a different global state
@@ -26,18 +26,18 @@ import { Precondition } from '../structures/Precondition';
 const cooldown: Collection<string, RateLimitManager> = new Collection();
 
 export class CooldownPrecondition extends Precondition {
-    public constructor(env: ENV) {
+    public constructor(env: Env) {
         super({
             env: env,
             name: 'cooldown',
         });
     }
 
-    public async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
+    public override async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
         return this.cooldown(command, interaction);
     }
 
-    public async contextMenu(command: Command, interaction: APIContextMenuInteraction) {
+    public override async contextMenu(command: Command, interaction: APIContextMenuInteraction) {
         return this.cooldown(command, interaction);
     }
 

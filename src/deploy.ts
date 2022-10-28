@@ -1,19 +1,19 @@
 import 'dotenv/config';
-import {
-    type InteractionType,
-    type RESTPostAPIApplicationCommandsJSONBody,
+import type {
+    InteractionType,
+    RESTPostAPIApplicationCommandsJSONBody,
 } from 'discord-api-types/v10';
-import { type ENV } from './@types/ENV';
+import type { Env } from './@types/Env';
 import { commands } from './commands';
-import { type i18n } from './locales/i18n';
+import type { i18n } from './locales/i18n';
 
 (async () => {
     const {
         DISCORD_APPLICATION_ID,
         DISCORD_TOKEN,
-    } = process.env as unknown as ENV;
+    } = process.env as unknown as Env;
 
-    const env = process.env as unknown as ENV;
+    const env = process.env as unknown as Env;
 
     const commandInstances = Object.values(commands).map(
         (Command) => new Command!(env),

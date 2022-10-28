@@ -1,5 +1,5 @@
-import { type APIInteractionResponse } from 'discord-api-types/v10';
-import { locales } from '../locales/locales';
+import type { APIInteractionResponse } from 'discord-api-types/v10';
+import type { locales } from '../locales/locales';
 
 export const cooldown = 5000;
 

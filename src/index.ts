@@ -1,14 +1,14 @@
 import {
-    APIApplicationCommandAutocompleteInteraction,
+    type APIApplicationCommandAutocompleteInteraction,
     type APIApplicationCommandInteraction,
     type APIInteraction,
     type APIMessageComponentInteraction,
-    APIModalSubmitInteraction,
+    type APIModalSubmitInteraction,
     type APIPingInteraction,
     InteractionResponseType,
     InteractionType,
 } from 'discord-api-types/v10';
-import { ENV } from './@types/env';
+import type { Env } from './@types/Env';
 import { i18n } from './locales/i18n';
 import { APIResponse } from './structures/APIResponse';
 import { AutocompleteHandler } from './structures/AutocompleteHandler';
@@ -19,7 +19,7 @@ import { ModalHandler } from './structures/ModalHandler';
 import { verifyKey } from './utility/verify';
 
 export default {
-    fetch: async (request: Request, env: ENV, context: ExecutionContext) => {
+    fetch: async (request: Request, env: Env, context: ExecutionContext) => {
         if (request.method === 'POST') {
             const isValidRequest = await verifyKey(request, env);
 

@@ -10,14 +10,14 @@ import {
     InteractionResponseType,
     MessageFlags,
 } from 'discord-api-types/v10';
-import { type CustomID } from '../@types/customID';
-import { type ENV } from '../@types/env';
+import type { CustomId } from '../@types/CustomId';
+import type { Env } from '../@types/Env';
 import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
 import { root } from '../utility/Constants';
 
 export class TestCommand extends Command {
-    public constructor(env: ENV) {
+    public constructor(env: Env) {
         super({
             name: 'test',
             description: 'TESTING',
@@ -66,7 +66,7 @@ export class TestCommand extends Command {
         };
     }
 
-    public async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
+    public override async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
         const { i18n } = interaction;
 
         const response = await fetch(`${root}/users/@me/channels`, {
@@ -112,7 +112,7 @@ export class TestCommand extends Command {
                                 style: ButtonStyle.Primary,
                                 custom_id: JSON.stringify({
                                     customID: 'test',
-                                } as CustomID),
+                                } as CustomId),
                             },
                         ],
                     },
@@ -121,15 +121,15 @@ export class TestCommand extends Command {
         });
     }
 
-    public async contextMenu(interaction: APIContextMenuInteraction) {
+    public override async contextMenu(interaction: APIContextMenuInteraction) {
         const { i18n } = interaction;
 
         const userId = 'users' in interaction.data.resolved
-            ? Object.values(interaction.data.resolved.users)[0].id
+            ? Object.values(interaction.data.resolved.users)[0]!.id
             : null;
 
         const messageId = 'messages' in interaction.data.resolved
-            ? Object.values(interaction.data.resolved.messages)[0].id
+            ? Object.values(interaction.data.resolved.messages)[0]!.id
             : null;
 
         return new APIResponse({
@@ -146,7 +146,7 @@ export class TestCommand extends Command {
         });
     }
 
-    public async autocomplete(interaction: APIApplicationCommandAutocompleteInteraction) {
+    public override async autocomplete(interaction: APIApplicationCommandAutocompleteInteraction) {
         const { i18n } = interaction;
 
         return new APIResponse({

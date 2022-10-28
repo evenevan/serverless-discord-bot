@@ -1,4 +1,4 @@
-export interface ENV {
+export interface Env {
     DATABASE_URL: string,
     DISCORD_TOKEN: string,
     DISCORD_APPLICATION_ID: string,

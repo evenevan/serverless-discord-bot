@@ -2,8 +2,8 @@ import {
     isChatInputApplicationCommandInteraction,
     isContextMenuApplicationCommandInteraction,
 } from 'discord-api-types/utils/v10';
-import { type APIApplicationCommandInteraction } from 'discord-api-types/v10';
-import { type ENV } from '../@types/env';
+import type { APIApplicationCommandInteraction } from 'discord-api-types/v10';
+import type { Env } from '../@types/Env';
 import { APIResponse } from './APIResponse';
 import { commands } from '../commands';
 import { preconditions } from '../preconditions';
@@ -12,9 +12,9 @@ import { preconditions } from '../preconditions';
 /* eslint-disable no-await-in-loop */
 
 export class CommandHandler {
-    public readonly env: ENV;
+    public readonly env: Env;
 
-    public constructor(env: ENV) {
+    public constructor(env: Env) {
         this.env = env;
     }
 

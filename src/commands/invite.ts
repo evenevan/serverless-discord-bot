@@ -4,12 +4,12 @@ import {
     InteractionResponseType,
     MessageFlags,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/env';
+import type { Env } from '../@types/Env';
 import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
 
 export class InviteCommand extends Command {
-    public constructor(env: ENV) {
+    public constructor(env: Env) {
         super({
             name: 'invite',
             description: 'Get an invite link to add the bot to your server',
@@ -26,7 +26,7 @@ export class InviteCommand extends Command {
         };
     }
 
-    public async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
+    public override async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
         const { i18n } = interaction;
 
         return new APIResponse({

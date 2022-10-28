@@ -4,13 +4,13 @@ import {
     InteractionResponseType,
     TextInputStyle,
 } from 'discord-api-types/v10';
-import { type CustomID } from '../@types/customID';
-import { type ENV } from '../@types/env';
+import type { CustomId } from '../@types/CustomId';
+import type { Env } from '../@types/Env';
 import { APIResponse } from '../structures/APIResponse';
 import { Component } from '../structures/Component';
 
 export class TestComponent extends Component<APIMessageComponentButtonInteraction> {
-    public constructor(env: ENV) {
+    public constructor(env: Env) {
         super({
             env: env,
             customID: 'test',
@@ -25,7 +25,7 @@ export class TestComponent extends Component<APIMessageComponentButtonInteractio
             data: {
                 custom_id: JSON.stringify({
                     customID: 'test',
-                } as CustomID),
+                } as CustomId),
                 title: i18n.getMessage(
                     'componentsTestResponseTitle',
                 ),
@@ -37,7 +37,7 @@ export class TestComponent extends Component<APIMessageComponentButtonInteractio
                                 type: ComponentType.TextInput,
                                 custom_id: JSON.stringify({
                                     customID: 'input1',
-                                } as CustomID),
+                                } as CustomId),
                                 style: TextInputStyle.Short,
                                 label: i18n.getMessage(
                                     'componentsTestResponseComponentsZeroLabel',
@@ -52,7 +52,7 @@ export class TestComponent extends Component<APIMessageComponentButtonInteractio
                                 type: ComponentType.TextInput,
                                 custom_id: JSON.stringify({
                                     customID: 'input2',
-                                } as CustomID),
+                                } as CustomId),
                                 style: TextInputStyle.Paragraph,
                                 label: i18n.getMessage(
                                     'componentsTestResponseComponentsOneLabel',

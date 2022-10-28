@@ -8,24 +8,24 @@ import {
     InteractionType,
     MessageFlags,
 } from 'discord-api-types/v10';
-import { type ENV } from '../@types/env';
+import type { Env } from '../@types/Env';
 import { APIResponse } from '../structures/APIResponse';
-import { type Command } from '../structures/Command';
+import type { Command } from '../structures/Command';
 import { Precondition } from '../structures/Precondition';
 
 export class GuildOnlyPrecondition extends Precondition {
-    public constructor(env: ENV) {
+    public constructor(env: Env) {
         super({
             env: env,
             name: 'guildOnly',
         });
     }
 
-    public async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
+    public override async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
         return this.guildOnly(command, interaction);
     }
 
-    public async contextMenu(command: Command, interaction: APIContextMenuInteraction) {
+    public override async contextMenu(command: Command, interaction: APIContextMenuInteraction) {
         return this.guildOnly(command, interaction);
     }
 

@@ -1,10 +1,10 @@
 import { PrismaClient } from '@prisma/client/edge';
-import { type ENV } from '../@types/ENV';
+import type { Env } from '../@types/Env';
 
 let client: PrismaClient | null = null;
 
 export class Database extends PrismaClient {
-    constructor(env: ENV) {
+    constructor(env: Env) {
         if (client === null) {
             super({
                 datasources: {

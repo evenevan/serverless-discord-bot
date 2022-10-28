@@ -1,9 +1,9 @@
-import { type APIModalSubmitInteraction } from 'discord-api-types/v10';
-import { type ENV } from '../@types/env';
-import { APIResponse } from './APIResponse';
+import type { APIModalSubmitInteraction } from 'discord-api-types/v10';
+import type { Env } from '../@types/Env';
+import type { APIResponse } from './APIResponse';
 
 export abstract class Modal {
-    public readonly env: ENV;
+    public readonly env: Env;
 
     public readonly customID: string;
 
@@ -11,7 +11,7 @@ export abstract class Modal {
         env,
         customID,
     }: {
-        env: ENV,
+        env: Env,
         customID: string,
     }) {
         this.env = env;

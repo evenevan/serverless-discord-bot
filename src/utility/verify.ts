@@ -1,4 +1,4 @@
-import { type ENV } from '../@types/env';
+import type { Env } from '../@types/Env';
 
 // thanks to devsnek via https://gist.github.com/devsnek/77275f6e3f810a9545440931ed314dc1
 function hex2bin(hex: string) {
@@ -13,7 +13,7 @@ let publicKey: CryptoKey | null = null;
 
 const encoder = new TextEncoder();
 
-export async function verifyKey(request: Request, env: ENV) {
+export async function verifyKey(request: Request, env: Env) {
     const signature = hex2bin(request.headers.get('X-Signature-Ed25519')!);
     const timestamp = request.headers.get('X-Signature-Timestamp');
     const unknown = await request.clone().text();

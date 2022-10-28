@@ -1,14 +1,10 @@
 {
+    "extends": "@tsconfig/node18-strictest/tsconfig.json",
     "compilerOptions": {
-        "target": "es2022",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "strict": true,
-        "alwaysStrict": true,
-        "esModuleInterop": true,
-        "downlevelIteration": true,
+        "exactOptionalPropertyTypes": false,
+        "noPropertyAccessFromIndexSignature": false,
         "outDir": "dist",
+        "resolveJsonModule": true,
         "types": [
             "@cloudflare/workers-types",
             "node"

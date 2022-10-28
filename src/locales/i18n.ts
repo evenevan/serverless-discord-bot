@@ -4,12 +4,13 @@ import { defaultLocale } from '../utility/Constants';
 // Simple implementation of Chrome's/Firefox's i18n
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export class i18n {
-    public readonly locale: typeof locales[keyof typeof locales];
+    private locale: typeof locales[keyof typeof locales];
 
-    public readonly localeName: string;
+    private localeName: string;
 
     public constructor(locale?: string) {
-        this.localeName = locale && locales[locale as keyof typeof locales]
+        this.localeName = locale
+        && locales[locale as keyof typeof locales]
             ? locale
             : defaultLocale;
 
@@ -19,10 +20,11 @@ export class i18n {
         this.getMessage = this.getMessage.bind(this);
     }
 
-    public getMessage(
-        string: keyof typeof this.locale,
-        options?: (string | number | bigint)[],
-    ) {
+    public getLocale() {
+        return this.localeName;
+    }
+
+    public getMessage(string: keyof typeof this.locale, options?: (string | number | bigint)[]) {
         let message = this.locale[string]?.message;
 
         if (message && typeof options !== 'undefined') {
@@ -35,5 +37,14 @@ export class i18n {
         }
 
         return message || 'null';
+    }
+
+    public setLocale(locale: string) {
+        this.localeName = locale
+        && locales[locale as keyof typeof locales]
+            ? locale
+            : defaultLocale;
+
+        this.locale = locales[this.localeName as keyof typeof locales];
     }
 }
