@@ -3,7 +3,7 @@ import {
     InteractionResponseType,
     MessageFlags,
 } from 'discord-api-types/v10';
-import type { Env } from '../@types/temp';
+import type { Env } from '../@types/Env';
 import { APIResponse } from '../structures/APIResponse';
 import { Modal } from '../structures/Modal';
 

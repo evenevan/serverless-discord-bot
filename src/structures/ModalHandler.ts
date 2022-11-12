@@ -1,6 +1,6 @@
 import type { APIModalSubmitInteraction } from 'discord-api-types/v10';
 import type { CustomId } from '../@types/CustomId';
-import type { Env } from '../@types/temp';
+import type { Env } from '../@types/Env';
 import { APIResponse } from './APIResponse';
 import { modals } from '../modals';
 

@@ -1,4 +1,4 @@
-import type { Env } from '../@types/temp';
+import type { Env } from '../@types/Env';
 
 // thanks to devsnek via https://gist.github.com/devsnek/77275f6e3f810a9545440931ed314dc1
 function hex2bin(hex: string) {

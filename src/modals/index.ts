@@ -1,4 +1,4 @@
-import type { Env } from '../@types/temp';
+import type { Env } from '../@types/Env';
 import type { Modal } from '../structures/Modal';
 import { TestModal } from './test';
 

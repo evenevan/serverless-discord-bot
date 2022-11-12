@@ -1,4 +1,4 @@
-import type { Env } from '../@types/temp';
+import type { Env } from '../@types/Env';
 import { CooldownPrecondition } from './cooldown';
 import { GuildOnlyPrecondition } from './guildOnly';
 import { OwnerOnlyPrecondition } from './ownerOnly';

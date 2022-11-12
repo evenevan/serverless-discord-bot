@@ -1,5 +1,5 @@
 import type { APIApplicationCommandAutocompleteInteraction } from 'discord-api-types/v10';
-import type { Env } from '../@types/temp';
+import type { Env } from '../@types/Env';
 import { commands } from '../commands';
 import { APIResponse } from './APIResponse';
 

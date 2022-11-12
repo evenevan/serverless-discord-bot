@@ -2,7 +2,7 @@ import type {
     APIChatInputApplicationCommandInteraction,
     APIContextMenuInteraction,
 } from 'discord-api-types/v10';
-import type { Env } from '../@types/temp';
+import type { Env } from '../@types/Env';
 import type { APIResponse } from './APIResponse';
 import type { Command } from './Command';
 

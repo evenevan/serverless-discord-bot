@@ -3,7 +3,7 @@ import type {
     InteractionType,
     RESTPostAPIApplicationCommandsJSONBody,
 } from 'discord-api-types/v10';
-import type { EnvDeploy } from './@types/temp';
+import type { EnvDeploy } from './@types/Env';
 import { commands } from './commands';
 import type { i18n } from './locales/i18n';
 

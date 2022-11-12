@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client/edge';
-import type { Env } from '../@types/temp';
+import type { Env } from '../@types/Env';
 
 let client: PrismaClient | null = null;
 
