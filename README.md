@@ -1,4 +1,4 @@
-A serverless Discord Bot designed for Cloudflare Workers.
+A serverless Discord bot designed for Cloudflare Workers.
 
 Average CPU Time (roughly) w/o database:
 - Median: 3.5 milliseconds
@@ -9,9 +9,9 @@ Average CPU Time (roughly) w/o database:
 
 Features:
 - Basic i18n implementation
-- Built in database via Prisma (WIP)
-- Chat input support (Slash commands)
-- Context menu support (Right click actions)
+- Built in database via Prisma
+- Chat input support
+- Context menu support
 - Easy deployment of commands
 - Minimal dependencies
 - Object-oriented design
