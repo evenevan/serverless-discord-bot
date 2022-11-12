@@ -20,6 +20,7 @@
     "dependencies": {
         "@discordjs/collection": "^1.0.1",
         "@prisma/client": "^4.2.0",
+        "@sapphire/discord-utilities": "^2.12.0",
         "@sapphire/ratelimits": "^2.4.4",
         "@sapphire/snowflake": "^3.2.2",
         "deepmerge-ts": "^4.2.1",

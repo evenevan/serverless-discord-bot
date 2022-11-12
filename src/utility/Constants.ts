@@ -24,4 +24,6 @@ export const restRequestTimeout: number = 5000;
 
 export const retryLimit: number = 3;
 
-export const root: string = 'https://discord.com/api/v10';
+export const APIRoot = 'https://discord.com/api/v10';
+
+export const CDNRoot = 'https://cdn.discordapp.com';

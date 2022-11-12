@@ -34,7 +34,7 @@ export class InviteCommand extends Command {
             data: {
                 content: i18n.getMessage(
                     'commandsInviteChatInputResponse', [
-                        `https://discord.com/api/oauth2/authorize?client_id=${this.env.DISCORD_APPLICATION_ID}&permissions=2048&scope=applications.commands%20bot`,
+                        `https://discord.com/api/oauth2/authorize?client_id=${interaction.application_id}&permissions=2048&scope=applications.commands%20bot`,
                     ],
                 ),
                 flags: MessageFlags.Ephemeral,

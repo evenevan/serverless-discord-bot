@@ -1,7 +1,9 @@
+import { InteractionOptionResolver } from '@sapphire/discord-utilities';
 import {
     type APIApplicationCommandAutocompleteInteraction,
+    type APIApplicationCommandInteraction,
     type APIChatInputApplicationCommandInteraction,
-    APIContextMenuInteraction,
+    type APIContextMenuInteraction,
     type APIDMChannel,
     ApplicationCommandOptionType,
     ApplicationCommandType,
@@ -14,7 +16,7 @@ import type { CustomId } from '../@types/CustomId';
 import type { Env } from '../@types/Env';
 import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
-import { root } from '../utility/Constants';
+import { APIRoot } from '../utility/Constants';
 
 export class TestCommand extends Command {
     public constructor(env: Env) {
@@ -69,7 +71,7 @@ export class TestCommand extends Command {
     public override async chatInput(interaction: APIChatInputApplicationCommandInteraction) {
         const { i18n } = interaction;
 
-        const response = await fetch(`${root}/users/@me/channels`, {
+        const response = await fetch(`${APIRoot}/users/@me/channels`, {
             method: 'POST',
             headers: {
                 Authorization: `Bot ${this.env.DISCORD_TOKEN}`,
@@ -82,7 +84,7 @@ export class TestCommand extends Command {
 
         const channel = await response.json() as APIDMChannel;
 
-        await fetch(`${root}/channels/${channel.id}/messages`, {
+        await fetch(`${APIRoot}/channels/${channel.id}/messages`, {
             method: 'POST',
             headers: {
                 Authorization: `Bot ${this.env.DISCORD_TOKEN}`,
@@ -124,12 +126,15 @@ export class TestCommand extends Command {
     public override async contextMenu(interaction: APIContextMenuInteraction) {
         const { i18n } = interaction;
 
-        const userId = 'users' in interaction.data.resolved
-            ? Object.values(interaction.data.resolved.users)[0]!.id
+        // @ts-ignore i have no idea why this doesn't work
+        const options = new InteractionOptionResolver(interaction as APIApplicationCommandInteraction);
+
+        const userId = interaction.data.type === ApplicationCommandType.User
+            ? options.getTargetUser().id
             : null;
 
-        const messageId = 'messages' in interaction.data.resolved
-            ? Object.values(interaction.data.resolved.messages)[0]!.id
+        const messageId = interaction.data.type === ApplicationCommandType.Message
+            ? options.getTargetMessage().id
             : null;
 
         return new APIResponse({

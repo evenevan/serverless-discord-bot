@@ -1,10 +1,10 @@
 import type { Env } from '../@types/Env';
 import type { Modal } from '../structures/Modal';
-import { TestModal } from './test';
+// import { TestModal } from './test';
 
 export const modals = {
-    test: TestModal,
+    // test: TestModal,
 } as {
-    test: new (env: Env) => TestModal,
+    // test: new (env: Env) => TestModal,
     [key: string]: (new (env: Env) => Modal) | undefined,
 };
