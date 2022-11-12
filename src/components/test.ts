@@ -5,7 +5,7 @@ import {
     TextInputStyle,
 } from 'discord-api-types/v10';
 import type { CustomId } from '../@types/CustomId';
-import type { Env } from '../@types/Env';
+import type { Env } from '../@types/temp';
 import { APIResponse } from '../structures/APIResponse';
 import { Component } from '../structures/Component';
 

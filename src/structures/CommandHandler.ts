@@ -3,7 +3,7 @@ import {
     isContextMenuApplicationCommandInteraction,
 } from 'discord-api-types/utils/v10';
 import type { APIApplicationCommandInteraction } from 'discord-api-types/v10';
-import type { Env } from '../@types/Env';
+import type { Env } from '../@types/temp';
 import { APIResponse } from './APIResponse';
 import { commands } from '../commands';
 import { preconditions } from '../preconditions';

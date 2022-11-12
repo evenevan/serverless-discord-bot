@@ -1,5 +1,5 @@
 import type { APIMessageComponentInteraction } from 'discord-api-types/v10';
-import type { Env } from '../@types/Env';
+import type { Env } from '../@types/temp';
 import type { APIResponse } from './APIResponse';
 
 export abstract class Component<T extends APIMessageComponentInteraction> {

@@ -8,7 +8,7 @@ import {
     InteractionResponseType,
     InteractionType,
 } from 'discord-api-types/v10';
-import type { Env } from './@types/Env';
+import type { Env } from './@types/temp';
 import { i18n } from './locales/i18n';
 import { APIResponse } from './structures/APIResponse';
 import { AutocompleteHandler } from './structures/AutocompleteHandler';

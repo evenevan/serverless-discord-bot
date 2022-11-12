@@ -12,7 +12,7 @@ import {
     InteractionType,
     MessageFlags,
 } from 'discord-api-types/v10';
-import type { Env } from '../@types/Env';
+import type { Env } from '../@types/temp';
 import { APIResponse } from '../structures/APIResponse';
 import type { Command } from '../structures/Command';
 import { Precondition } from '../structures/Precondition';

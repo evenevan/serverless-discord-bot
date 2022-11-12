@@ -31,5 +31,8 @@
         "dev": "wrangler dev",
         "publish": "wrangler publish",
         "deploy": "npx ts-node src/deploy.ts"
+    },
+    "engines": {
+        "node": ">=18.0.0"
     }
 }
