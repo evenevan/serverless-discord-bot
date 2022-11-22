@@ -5,6 +5,9 @@
     "commandsPingChatInputResponse": {
         "message": "Pong! $1ms."
     },
+    "commandsQuestionChatInputSend": {
+        "message": "Done! $1 by $2 added."
+    },
 
     "commandsTestChatInputSend": {
         "message": "@everyone"

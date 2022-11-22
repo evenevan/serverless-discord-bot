@@ -3,7 +3,7 @@ import type {
     InteractionType,
     RESTPostAPIApplicationCommandsJSONBody,
 } from 'discord-api-types/v10';
-import type { EnvDeploy } from './@types/Env';
+import type { Env, EnvDeploy } from './@types/Env';
 import { commands } from './commands';
 import type { i18n } from './locales/i18n';
 
@@ -16,7 +16,7 @@ import type { i18n } from './locales/i18n';
     const env = process.env as unknown as EnvDeploy;
 
     const commandInstances = Object.values(commands).map(
-        (Command) => new Command!(env),
+        (Command) => new Command!(env as unknown as Env),
     );
 
     const globalCommands = commandInstances.filter(

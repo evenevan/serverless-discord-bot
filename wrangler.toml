@@ -3,5 +3,9 @@ compatibility_date = "2022-06-29"
 main = "src/index.ts"
 node_compat = true
 
+kv_namespaces = [
+  { binding = "QUESTIONS", id = "cb6ef3a15a524f639cfeda009d3d6107" }
+]
+
 [vars]
 DISCORD_PUBLIC_KEY = "2b485cfd218d5b5b6450b9c382b28c3777b5f1dccef6729abbfa8c0b8318ecd0"
