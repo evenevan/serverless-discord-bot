@@ -1,5 +1,5 @@
 import type { APIMessageComponentInteraction } from 'discord-api-types/v10';
-import type { CustomId } from '../@types/CustomId';
+import type { CustomId } from '../@types/temp';
 import type { Env } from '../@types/Env';
 import { APIResponse } from './APIResponse';
 import { components } from '../components';
