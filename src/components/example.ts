@@ -4,7 +4,7 @@ import {
     InteractionResponseType,
     TextInputStyle,
 } from 'discord-api-types/v10';
-import type { CustomId } from '../@types/temp';
+import type { CustomId } from '../@types/CustomId';
 import type { Env } from '../@types/Env';
 import { APIResponse } from '../structures/APIResponse';
 import { Component } from '../structures/Component';
