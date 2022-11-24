@@ -5,10 +5,12 @@
     "commandsPingChatInputResponse": {
         "message": "Pong! $1ms."
     },
-    "commandsQuestionChatInputSend": {
-        "message": "Done! $1 by $2 added."
+    "commandsQuestionChatInputModalTitle": {
+        "message": "$1's Question"
     },
-
+    "commandsQuestionChatInputModalLabel": {
+        "message": "Question"
+    },
     "commandsTestChatInputSend": {
         "message": "@everyone"
     },
@@ -30,10 +32,12 @@
     "componentsTestResponseComponentsOneLabel": {
         "message": "More Random Text Here"
     },
+    "modalsQuestionResponse": {
+        "message": "$1's question: \n```\n$2\n```\n"
+    },
     "modalsTestResponse": {
         "message": "Received modal interaction!"
     },
-
     "preconditionsCooldown": {
         "message": "You are executing this command too fast! This command can be executed $1 time(s) per every $2 seconds. Please wait $3 more seconds before using this command again."
     },
