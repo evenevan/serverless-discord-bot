@@ -7,13 +7,7 @@ export abstract class Modal {
 
     public readonly customID: string;
 
-    public constructor({
-        env,
-        customID,
-    }: {
-        env: Env,
-        customID: string,
-    }) {
+    public constructor({ env, customID }: { env: Env; customID: string }) {
         this.env = env;
         this.customID = customID;
     }

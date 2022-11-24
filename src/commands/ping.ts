@@ -36,11 +36,7 @@ export class PingCommand extends Command {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: i18n.getMessage(
-                    'commandsPingChatInputResponse', [
-                        endTime - startTime,
-                    ],
-                ),
+                content: i18n.getMessage('commandsPingChatInputResponse', [endTime - startTime]),
                 flags: MessageFlags.Ephemeral,
             },
         });

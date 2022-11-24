@@ -19,9 +19,7 @@ export class CommandHandler {
     }
 
     public async handle(interaction: APIApplicationCommandInteraction) {
-        const Command = commands[
-            interaction.data.name
-        ];
+        const Command = commands[interaction.data.name];
 
         if (Command) {
             const command = new Command(this.env);

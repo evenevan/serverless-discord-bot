@@ -22,7 +22,10 @@ export class OwnerOnlyPrecondition extends Precondition {
         });
     }
 
-    public override async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
+    public override async chatInput(
+        command: Command,
+        interaction: APIChatInputApplicationCommandInteraction,
+    ) {
         return this.ownerOnly(command, interaction);
     }
 
@@ -53,9 +56,7 @@ export class OwnerOnlyPrecondition extends Precondition {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: i18n.getMessage(
-                    'preconditionOwnerOnly',
-                ),
+                content: i18n.getMessage('preconditionOwnerOnly'),
                 flags: MessageFlags.Ephemeral,
             },
         });

@@ -1,8 +1,5 @@
 import { Collection } from '@discordjs/collection';
-import {
-    RateLimit,
-    RateLimitManager,
-} from '@sapphire/ratelimits';
+import { RateLimit, RateLimitManager } from '@sapphire/ratelimits';
 import {
     type APIApplicationCommandInteraction,
     type APIBaseInteraction,
@@ -33,7 +30,10 @@ export class CooldownPrecondition extends Precondition {
         });
     }
 
-    public override async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
+    public override async chatInput(
+        command: Command,
+        interaction: APIChatInputApplicationCommandInteraction,
+    ) {
         return this.cooldown(command, interaction);
     }
 
@@ -67,20 +67,21 @@ export class CooldownPrecondition extends Precondition {
         return undefined;
     }
 
-    public async error(command: Command, context: RateLimit, interaction: APIBaseInteraction<InteractionType, unknown>) {
+    public async error(
+        command: Command,
+        context: RateLimit,
+        interaction: APIBaseInteraction<InteractionType, unknown>,
+    ) {
         const { i18n } = interaction;
 
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: i18n.getMessage(
-                    'preconditionsCooldown',
-                    [
-                        command.cooldownLimit,
-                        command.cooldown / 1000,
-                        (context.remainingTime / 1000).toFixed(1),
-                    ],
-                ),
+                content: i18n.getMessage('preconditionsCooldown', [
+                    command.cooldownLimit,
+                    command.cooldown / 1000,
+                    (context.remainingTime / 1000).toFixed(1),
+                ]),
                 flags: MessageFlags.Ephemeral,
             },
         });

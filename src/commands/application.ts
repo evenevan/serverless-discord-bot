@@ -53,7 +53,7 @@ export class ApplicationCommand extends Command {
             method: 'GET',
         });
 
-        const application = await response.json() as APIApplication;
+        const application = (await response.json()) as APIApplication;
 
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
@@ -65,8 +65,10 @@ export class ApplicationCommand extends Command {
     }
 
     public override async contextMenu(interaction: APIContextMenuInteraction) {
-        // @ts-ignore i have no idea why this doesn't work
-        const options = new InteractionOptionResolver(interaction as APIApplicationCommandInteraction);
+        const options = new InteractionOptionResolver(
+            // @ts-ignore i have no idea why this doesn't work
+            interaction as APIApplicationCommandInteraction,
+        );
 
         const { id } = options.getTargetUser();
 
@@ -74,7 +76,7 @@ export class ApplicationCommand extends Command {
             method: 'GET',
         });
 
-        const application = await response.json() as APIApplication;
+        const application = (await response.json()) as APIApplication;
 
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,

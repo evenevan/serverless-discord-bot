@@ -8,7 +8,7 @@ export const preconditions = {
     guildOnly: GuildOnlyPrecondition,
     ownerOnly: OwnerOnlyPrecondition,
 } as {
-    cooldown: new (env: Env) => CooldownPrecondition,
-    guildOnly: new (env: Env) => GuildOnlyPrecondition,
-    ownerOnly: new (env: Env) => OwnerOnlyPrecondition,
+    cooldown: new (env: Env) => CooldownPrecondition;
+    guildOnly: new (env: Env) => GuildOnlyPrecondition;
+    ownerOnly: new (env: Env) => OwnerOnlyPrecondition;
 };

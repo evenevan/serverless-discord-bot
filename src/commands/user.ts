@@ -51,13 +51,13 @@ export class UserCommand extends Command {
 
         const user = options.getUser('user', true);
 
-        const format = user.avatar?.startsWith('a_')
-            ? ImageFormat.GIF
-            : ImageFormat.PNG;
+        const format = user.avatar?.startsWith('a_') ? ImageFormat.GIF : ImageFormat.PNG;
 
         const avatarRoute = user.avatar
             ? CDNRoutes.userAvatar(user.id, user.avatar, format)
-            : CDNRoutes.defaultUserAvatar((Number(user.discriminator) % 5) as DefaultUserAvatarAssets);
+            : CDNRoutes.defaultUserAvatar(
+                (Number(user.discriminator) % 5) as DefaultUserAvatarAssets,
+            );
 
         const avatarURL = `${CDNRoot}/${avatarRoute}?size=4096`;
 
@@ -71,18 +71,20 @@ export class UserCommand extends Command {
     }
 
     public override async contextMenu(interaction: APIContextMenuInteraction) {
-        // @ts-ignore i have no idea why this doesn't work
-        const options = new InteractionOptionResolver(interaction as APIApplicationCommandInteraction);
+        const options = new InteractionOptionResolver(
+            // @ts-ignore i have no idea why this doesn't work
+            interaction as APIApplicationCommandInteraction,
+        );
 
         const user = options.getTargetUser();
 
-        const format = user.avatar?.startsWith('a_')
-            ? ImageFormat.GIF
-            : ImageFormat.PNG;
+        const format = user.avatar?.startsWith('a_') ? ImageFormat.GIF : ImageFormat.PNG;
 
         const avatarRoute = user.avatar
             ? CDNRoutes.userAvatar(user.id, user.avatar, format)
-            : CDNRoutes.defaultUserAvatar((Number(user.discriminator) % 5) as DefaultUserAvatarAssets);
+            : CDNRoutes.defaultUserAvatar(
+                (Number(user.discriminator) % 5) as DefaultUserAvatarAssets,
+            );
 
         const avatarURL = `${CDNRoot}/${avatarRoute}?size=4096`;
 

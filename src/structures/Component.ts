@@ -7,13 +7,7 @@ export abstract class Component<T extends APIMessageComponentInteraction> {
 
     public readonly customID: string;
 
-    public constructor({
-        env,
-        customID,
-    }: {
-        env: Env,
-        customID: string,
-    }) {
+    public constructor({ env, customID }: { env: Env; customID: string }) {
         this.env = env;
         this.customID = customID;
     }

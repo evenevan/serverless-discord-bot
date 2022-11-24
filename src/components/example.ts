@@ -9,11 +9,11 @@ import type { Env } from '../@types/Env';
 import { APIResponse } from '../structures/APIResponse';
 import { Component } from '../structures/Component';
 
-export class TestComponent extends Component<APIMessageComponentButtonInteraction> {
+export class ExampleComponent extends Component<APIMessageComponentButtonInteraction> {
     public constructor(env: Env) {
         super({
             env: env,
-            customID: 'test',
+            customID: 'example',
         });
     }
 
@@ -24,11 +24,9 @@ export class TestComponent extends Component<APIMessageComponentButtonInteractio
             type: InteractionResponseType.Modal,
             data: {
                 custom_id: JSON.stringify({
-                    customID: 'test',
+                    customID: 'example',
                 } as CustomId),
-                title: i18n.getMessage(
-                    'componentsTestResponseTitle',
-                ),
+                title: i18n.getMessage('componentsExampleResponseTitle'),
                 components: [
                     {
                         type: ComponentType.ActionRow,
@@ -36,11 +34,11 @@ export class TestComponent extends Component<APIMessageComponentButtonInteractio
                             {
                                 type: ComponentType.TextInput,
                                 custom_id: JSON.stringify({
-                                    customID: 'input1',
+                                    customID: 'inputOne',
                                 } as CustomId),
                                 style: TextInputStyle.Short,
                                 label: i18n.getMessage(
-                                    'componentsTestResponseComponentsZeroLabel',
+                                    'componentsExampleResponseComponentsOneLabel',
                                 ),
                             },
                         ],
@@ -51,11 +49,11 @@ export class TestComponent extends Component<APIMessageComponentButtonInteractio
                             {
                                 type: ComponentType.TextInput,
                                 custom_id: JSON.stringify({
-                                    customID: 'input2',
+                                    customID: 'inputTwo',
                                 } as CustomId),
                                 style: TextInputStyle.Paragraph,
                                 label: i18n.getMessage(
-                                    'componentsTestResponseComponentsOneLabel',
+                                    'componentsExampleResponseComponentsTwoLabel',
                                 ),
                                 required: false,
                             },

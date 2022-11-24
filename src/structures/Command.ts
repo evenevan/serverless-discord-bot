@@ -28,9 +28,9 @@ export class Command {
     public readonly guildIDs?: string[];
 
     public structure!: {
-        chatInput?: RESTPostAPIApplicationCommandsJSONBody,
-        user?: RESTPostAPIApplicationCommandsJSONBody,
-        message?: RESTPostAPIApplicationCommandsJSONBody,
+        chatInput?: RESTPostAPIApplicationCommandsJSONBody;
+        user?: RESTPostAPIApplicationCommandsJSONBody;
+        message?: RESTPostAPIApplicationCommandsJSONBody;
     };
 
     public constructor({
@@ -42,13 +42,13 @@ export class Command {
         cooldownLimit,
         guildIDs,
     }: {
-        name: string,
-        description: string,
-        env: Env,
-        preconditions: (keyof typeof preconditionsType)[],
-        cooldown?: number,
-        cooldownLimit?: number,
-        guildIDs?: string[],
+        name: string;
+        description: string;
+        env: Env;
+        preconditions: (keyof typeof preconditionsType)[];
+        cooldown?: number;
+        cooldownLimit?: number;
+        guildIDs?: string[];
     }) {
         this.name = name;
 
@@ -69,5 +69,7 @@ export class Command {
 
     public contextMenu?(interaction: APIContextMenuInteraction): Promise<APIResponse>;
 
-    public autocomplete?(interaction: APIApplicationCommandAutocompleteInteraction): Promise<APIResponse>;
+    public autocomplete?(
+        interaction: APIApplicationCommandAutocompleteInteraction,
+    ): Promise<APIResponse>;
 }

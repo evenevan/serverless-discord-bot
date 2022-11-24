@@ -11,18 +11,18 @@ export class Precondition {
 
     public readonly name: string;
 
-    public constructor({
-        env,
-        name,
-    }: {
-        env: Env,
-        name: string,
-    }) {
+    public constructor({ env, name }: { env: Env; name: string }) {
         this.env = env;
         this.name = name;
     }
 
-    public chatInput?(command: Command, interaction: APIChatInputApplicationCommandInteraction): Promise<APIResponse | undefined>;
+    public chatInput?(
+        command: Command,
+        interaction: APIChatInputApplicationCommandInteraction,
+    ): Promise<APIResponse | undefined>;
 
-    public contextMenu?(command: Command, interaction: APIContextMenuInteraction): Promise<APIResponse | undefined>;
+    public contextMenu?(
+        command: Command,
+        interaction: APIContextMenuInteraction,
+    ): Promise<APIResponse | undefined>;
 }

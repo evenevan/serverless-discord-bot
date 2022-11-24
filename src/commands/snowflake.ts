@@ -66,8 +66,10 @@ export class SnowflakeCommand extends Command {
     }
 
     public override async contextMenu(interaction: APIContextMenuInteraction) {
-        // @ts-ignore i have no idea why this doesn't work
-        const options = new InteractionOptionResolver(interaction as APIApplicationCommandInteraction);
+        const options = new InteractionOptionResolver(
+            // @ts-ignore i have no idea why this doesn't work
+            interaction as APIApplicationCommandInteraction,
+        );
 
         const id = interaction.data.type === ApplicationCommandType.User
             ? options.getTargetUser().id

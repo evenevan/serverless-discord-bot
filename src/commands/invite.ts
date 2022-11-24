@@ -32,11 +32,9 @@ export class InviteCommand extends Command {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: i18n.getMessage(
-                    'commandsInviteChatInputResponse', [
-                        `https://discord.com/api/oauth2/authorize?client_id=${interaction.application_id}&permissions=2048&scope=applications.commands%20bot`,
-                    ],
-                ),
+                content: i18n.getMessage('commandsInviteChatInputResponse', [
+                    `https://discord.com/api/oauth2/authorize?client_id=${interaction.application_id}&permissions=2048&scope=applications.commands%20bot`,
+                ]),
                 flags: MessageFlags.Ephemeral,
             },
         });

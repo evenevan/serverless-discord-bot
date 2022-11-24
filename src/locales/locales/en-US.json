@@ -1,4 +1,19 @@
 {
+    "commandsExampleChatInputResponse": {
+        "message": "hi"
+    },
+    "commandsExampleChatInputResponseComponentsOneLabel": {
+        "message": "Example"
+    },
+    "commandsExampleChatInputSend": {
+        "message": "This is a DM sent over REST!"
+    },
+    "commandsExampleContextResponse": {
+        "message": "Message Id: $1, User Id: $2"
+    },
+    "commandsExampleAutocompleteResponse": {
+        "message": "Date: $1"
+    },
     "commandsInviteChatInputResponse": {
         "message": "[Invite this bot by clicking here!]($1 \"Click Here\")"
     },
@@ -11,32 +26,20 @@
     "commandsQuestionChatInputModalLabel": {
         "message": "Question"
     },
-    "commandsTestChatInputSend": {
-        "message": "@everyone"
-    },
-    "commandsTestChatInputResponse": {
-        "message": "hi"
-    },
-    "commandsTestContextResponse": {
-        "message": "Message Id: $1, User Id: $2"
-    },
-    "commandsTestAutocompleteResponse": {
-        "message": "Date: $1"
-    },
-    "componentsTestResponseTitle": {
+    "componentsExampleResponseTitle": {
         "message": "This is a Modal"
     },
-    "componentsTestResponseComponentsZeroLabel": {
+    "componentsExampleResponseComponentsOneLabel": {
         "message": "Random Text Here"
     },
-    "componentsTestResponseComponentsOneLabel": {
+    "componentsExampleResponseComponentsTwoLabel": {
         "message": "More Random Text Here"
     },
-    "modalsQuestionResponse": {
-        "message": "$1's question: \n```\n$2\n```\n"
+    "modalsExampleResponse": {
+        "message": "Received modal interaction!\n\nComponent 1 value:\n```$1```\nComponent 2 value:\n```$2```"
     },
-    "modalsTestResponse": {
-        "message": "Received modal interaction!"
+    "modalsQuestionResponse": {
+        "message": "$1's question:\n```$2```"
     },
     "preconditionsCooldown": {
         "message": "You are executing this command too fast! This command can be executed $1 time(s) per every $2 seconds. Please wait $3 more seconds before using this command again."

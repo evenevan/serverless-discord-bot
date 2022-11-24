@@ -31,9 +31,7 @@ export default {
                 });
             }
 
-            const interaction = await request.json() as
-                | APIInteraction
-                | APIPingInteraction;
+            const interaction = (await request.json()) as APIInteraction | APIPingInteraction;
 
             if (interaction.type === InteractionType.Ping) {
                 return new APIResponse({
@@ -41,59 +39,54 @@ export default {
                 });
             }
 
-            Object.defineProperty(
-                interaction,
-                'i18n',
-                {
-                    value: new i18n(interaction.locale),
-                },
-            );
+            Object.defineProperty(interaction, 'i18n', {
+                value: new i18n(interaction.locale),
+            });
 
-            console.log(
-                'Received interaction.',
-                `Type: ${interaction.type}.`,
-            );
+            console.log('Received interaction.', `Type: ${interaction.type}.`);
 
             // Some weird logic (probably on Prisma's side) causes this to not run without the IIFE block
-            context.waitUntil((async () => {
-                try {
-                    const userId = (interaction.member?.user.id ?? interaction.user?.id)!;
+            context.waitUntil(
+                (async () => {
+                    try {
+                        const userId = (interaction.member?.user.id ?? interaction.user?.id)!;
 
-                    await new Database(env).users.upsert({
-                        create: {
-                            id: userId,
-                        },
-                        update: {
-                            interactions: {
-                                increment: 1,
+                        await new Database(env).users.upsert({
+                            create: {
+                                id: userId,
                             },
-                        },
-                        where: {
-                            id: userId,
-                        },
-                    });
+                            update: {
+                                interactions: {
+                                    increment: 1,
+                                },
+                            },
+                            where: {
+                                id: userId,
+                            },
+                        });
 
-                    await new Database(env).interactions.create({
-                        data: {
-                            id: interaction.id,
-                            user_id: userId,
-                            type: interaction.type,
-                            guild_id: interaction.guild_id,
-                            name: 'name' in interaction.data
-                                ? interaction.data.name
-                                : null,
-                            options: 'options' in interaction.data
-                                ? JSON.parse(JSON.stringify(interaction.data.options ?? []))
-                                : [],
-                            custom_id: 'custom_id' in interaction.data
-                                ? interaction.data.custom_id
-                                : null,
-                        },
-                    });
-                } catch (error) {
-                    console.error((error as Error)?.stack);
-                }
-            })());
+                        await new Database(env).interactions.create({
+                            data: {
+                                id: interaction.id,
+                                user_id: userId,
+                                type: interaction.type,
+                                guild_id: interaction.guild_id,
+                                name: 'name' in interaction.data ? interaction.data.name : null,
+                                options:
+                                    'options' in interaction.data
+                                        ? JSON.parse(JSON.stringify(interaction.data.options ?? []))
+                                        : [],
+                                custom_id:
+                                    'custom_id' in interaction.data
+                                        ? interaction.data.custom_id
+                                        : null,
+                            },
+                        });
+                    } catch (error) {
+                        console.error((error as Error)?.stack);
+                    }
+                })(),
+            );
 
             switch (interaction.type) {
                 case InteractionType.ApplicationCommandAutocomplete:
@@ -109,9 +102,7 @@ export default {
                         interaction as APIMessageComponentInteraction,
                     );
                 case InteractionType.ModalSubmit:
-                    return new ModalHandler(env).handle(
-                        interaction as APIModalSubmitInteraction,
-                    );
+                    return new ModalHandler(env).handle(interaction as APIModalSubmitInteraction);
                 default:
                     console.warn(
                         'Unknown interaction type.',

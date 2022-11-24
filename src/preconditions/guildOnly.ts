@@ -21,7 +21,10 @@ export class GuildOnlyPrecondition extends Precondition {
         });
     }
 
-    public override async chatInput(command: Command, interaction: APIChatInputApplicationCommandInteraction) {
+    public override async chatInput(
+        command: Command,
+        interaction: APIChatInputApplicationCommandInteraction,
+    ) {
         return this.guildOnly(command, interaction);
     }
 
@@ -50,9 +53,7 @@ export class GuildOnlyPrecondition extends Precondition {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: i18n.getMessage(
-                    'preconditionGuildOnly',
-                ),
+                content: i18n.getMessage('preconditionGuildOnly'),
                 flags: MessageFlags.Ephemeral,
             },
         });

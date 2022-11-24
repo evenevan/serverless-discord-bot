@@ -1,11 +1,11 @@
 import type { APIMessageComponentInteraction } from 'discord-api-types/v10';
 import type { Env } from '../@types/Env';
 import type { Component } from '../structures/Component';
-// import { TestComponent } from './test';
+import { ExampleComponent } from './example';
 
 export const components = {
-    // test: TestComponent,
+    example: ExampleComponent,
 } as {
-    // test: new (env: Env) => TestComponent,
-    [key: string]: (new (env: Env) => Component<APIMessageComponentInteraction>) | undefined,
+    example: new (env: Env) => ExampleComponent;
+    [key: string]: (new (env: Env) => Component<APIMessageComponentInteraction>) | undefined;
 };

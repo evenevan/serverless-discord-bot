@@ -18,11 +18,11 @@ import { APIResponse } from '../structures/APIResponse';
 import { Command } from '../structures/Command';
 import { APIRoot } from '../utility/Constants';
 
-export class TestCommand extends Command {
+export class ExampleCommand extends Command {
     public constructor(env: Env) {
         super({
-            name: 'test',
-            description: 'TESTING',
+            name: 'example',
+            description: 'sends a button that creates a modal that creates a response',
             env: env,
             preconditions: ['cooldown', 'ownerOnly'],
             cooldown: 10000,
@@ -82,7 +82,7 @@ export class TestCommand extends Command {
             }),
         });
 
-        const channel = await response.json() as APIDMChannel;
+        const channel = (await response.json()) as APIDMChannel;
 
         await fetch(`${APIRoot}/channels/${channel.id}/messages`, {
             method: 'POST',
@@ -91,18 +91,14 @@ export class TestCommand extends Command {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                content: i18n.getMessage(
-                    'commandsTestChatInputSend',
-                ),
+                content: i18n.getMessage('commandsExampleChatInputSend'),
             }),
         });
 
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: i18n.getMessage(
-                    'commandsTestChatInputResponse',
-                ),
+                content: i18n.getMessage('commandsExampleChatInputResponse'),
                 flags: MessageFlags.Ephemeral,
                 components: [
                     {
@@ -110,10 +106,12 @@ export class TestCommand extends Command {
                         components: [
                             {
                                 type: ComponentType.Button,
-                                label: 'Test',
+                                label: i18n.getMessage(
+                                    'commandsExampleChatInputResponseComponentsOneLabel',
+                                ),
                                 style: ButtonStyle.Primary,
                                 custom_id: JSON.stringify({
-                                    customID: 'test',
+                                    customID: 'example',
                                 } as CustomId),
                             },
                         ],
@@ -126,8 +124,10 @@ export class TestCommand extends Command {
     public override async contextMenu(interaction: APIContextMenuInteraction) {
         const { i18n } = interaction;
 
-        // @ts-ignore i have no idea why this doesn't work
-        const options = new InteractionOptionResolver(interaction as APIApplicationCommandInteraction);
+        const options = new InteractionOptionResolver(
+            // @ts-ignore i have no idea why this doesn't work
+            interaction as APIApplicationCommandInteraction,
+        );
 
         const userId = interaction.data.type === ApplicationCommandType.User
             ? options.getTargetUser().id
@@ -140,12 +140,10 @@ export class TestCommand extends Command {
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: i18n.getMessage(
-                    'commandsTestContextResponse', [
-                        String(messageId),
-                        String(userId),
-                    ],
-                ),
+                content: i18n.getMessage('commandsExampleContextResponse', [
+                    String(messageId),
+                    String(userId),
+                ]),
                 flags: MessageFlags.Ephemeral,
             },
         });
@@ -159,11 +157,7 @@ export class TestCommand extends Command {
             data: {
                 choices: [
                     {
-                        name: i18n.getMessage(
-                            'commandsTestAutocompleteResponse', [
-                                Date.now(),
-                            ],
-                        ),
+                        name: i18n.getMessage('commandsExampleAutocompleteResponse', [Date.now()]),
                         value: Date.now().toString(),
                     },
                 ],

@@ -4,15 +4,11 @@ import { defaultResponse } from '../utility/Constants';
 
 export class APIResponse extends Response {
     public constructor(response?: APIInteractionResponse | null, init?: ResponseInit) {
-        super(
-            JSON.stringify(
-                deepmerge(defaultResponse, response),
-            ), {
-                ...init,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+        super(JSON.stringify(deepmerge(defaultResponse, response)), {
+            ...init,
+            headers: {
+                'Content-Type': 'application/json',
             },
-        );
+        });
     }
 }
