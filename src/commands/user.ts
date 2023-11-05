@@ -83,7 +83,10 @@ export class UserCommand extends Command {
         const avatarRoute = user.avatar
             ? CDNRoutes.userAvatar(user.id, user.avatar, format)
             : CDNRoutes.defaultUserAvatar(
-                (Number(user.discriminator) % 5) as DefaultUserAvatarAssets,
+                (user.discriminator === '0')
+                    // eslint-disable-next-line no-bitwise
+                    ? ((Number(user.id) >> 22) % 6) as DefaultUserAvatarAssets
+                    : (Number(user.discriminator) % 5) as DefaultUserAvatarAssets,
             );
 
         const avatarURL = `${CDNRoot}/${avatarRoute}?size=4096`;
