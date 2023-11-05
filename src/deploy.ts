@@ -6,6 +6,7 @@ import type {
 import type { Env, EnvDeploy } from './@types/Env';
 import { commands } from './commands';
 import type { i18n } from './locales/i18n';
+import type { Command } from './structures/Command';
 
 (async () => {
     const { DISCORD_APPLICATION_ID, DISCORD_TOKEN } = process.env as unknown as EnvDeploy;
@@ -14,7 +15,7 @@ import type { i18n } from './locales/i18n';
 
     const commandInstances = Object.values(commands).map(
         (Command) => new Command!(env as unknown as Env),
-    );
+    ) as Command[];
 
     const globalCommands = commandInstances
         .filter((command) => typeof command.guildIDs === 'undefined')
