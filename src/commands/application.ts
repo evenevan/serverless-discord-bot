@@ -48,12 +48,7 @@ export class ApplicationCommand extends Command {
         const options = new InteractionOptionResolver(interaction);
 
         const applicationId = options.getString('id', true);
-
-        const response = await fetch(`${APIRoot}/applications/${applicationId}/rpc`, {
-            method: 'GET',
-        });
-
-        const application = (await response.json()) as APIApplication;
+        const application = (await this.getApplication(applicationId)) as APIApplication;
 
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
@@ -70,13 +65,8 @@ export class ApplicationCommand extends Command {
             interaction as APIApplicationCommandInteraction,
         );
 
-        const { id } = options.getTargetUser();
-
-        const response = await fetch(`${APIRoot}/applications/${id}/rpc`, {
-            method: 'GET',
-        });
-
-        const application = (await response.json()) as APIApplication;
+        const user = options.getTargetUser();
+        const application = (await this.getApplication(user.id)) as APIApplication;
 
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
@@ -85,5 +75,15 @@ export class ApplicationCommand extends Command {
                 flags: MessageFlags.Ephemeral,
             },
         });
+    }
+
+    private async getApplication(id: string) {
+        const response = await fetch(`${APIRoot}/applications/${id}/rpc`, {
+            method: 'GET',
+        });
+
+        const application = (await response.json()) as APIApplication;
+
+        return application;
     }
 }

@@ -9,6 +9,7 @@ import {
     ImageFormat,
     InteractionResponseType,
     MessageFlags,
+    type APIUser,
 } from 'discord-api-types/v10';
 import type { Env } from '../@types/Env';
 import { APIResponse } from '../structures/APIResponse';
@@ -51,20 +52,10 @@ export class UserCommand extends Command {
 
         const user = options.getUser('user', true);
 
-        const format = user.avatar?.startsWith('a_') ? ImageFormat.GIF : ImageFormat.PNG;
-
-        const avatarRoute = user.avatar
-            ? CDNRoutes.userAvatar(user.id, user.avatar, format)
-            : CDNRoutes.defaultUserAvatar(
-                (Number(user.discriminator) % 5) as DefaultUserAvatarAssets,
-            );
-
-        const avatarURL = `${CDNRoot}/${avatarRoute}?size=4096`;
-
         return new APIResponse({
             type: InteractionResponseType.ChannelMessageWithSource,
             data: {
-                content: `${JSON.stringify(user, null, 2)}\n\n${avatarURL}`,
+                content: `${JSON.stringify(user, null, 2)}\n\n${this.getAvatar(user)}`,
                 flags: MessageFlags.Ephemeral,
             },
         });
@@ -78,6 +69,16 @@ export class UserCommand extends Command {
 
         const user = options.getTargetUser();
 
+        return new APIResponse({
+            type: InteractionResponseType.ChannelMessageWithSource,
+            data: {
+                content: `${JSON.stringify(user, null, 2)}\n\n${this.getAvatar(user)}`,
+                flags: MessageFlags.Ephemeral,
+            },
+        });
+    }
+
+    private getAvatar(user: APIUser) {
         const format = user.avatar?.startsWith('a_') ? ImageFormat.GIF : ImageFormat.PNG;
 
         const avatarRoute = user.avatar
@@ -89,14 +90,6 @@ export class UserCommand extends Command {
                     : (Number(user.discriminator) % 5) as DefaultUserAvatarAssets,
             );
 
-        const avatarURL = `${CDNRoot}/${avatarRoute}?size=4096`;
-
-        return new APIResponse({
-            type: InteractionResponseType.ChannelMessageWithSource,
-            data: {
-                content: `${JSON.stringify(user, null, 2)}\n\n${avatarURL}`,
-                flags: MessageFlags.Ephemeral,
-            },
-        });
+        return `${CDNRoot}${avatarRoute}?size=4096`;
     }
 }
