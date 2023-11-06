@@ -31,7 +31,7 @@
     "scripts": {
         "generate": "prisma generate --data-proxy",
         "dev": "wrangler dev",
-        "publish": "wrangler publish",
+        "publish": "wrangler deploy",
         "deploy": "npx ts-node src/deploy.ts"
     },
     "engines": {
